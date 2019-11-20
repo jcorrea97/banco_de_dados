@@ -154,4 +154,33 @@ public class PublicacaoDAO extends GenericDAO{
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/**
+	 * Adiciona uma publicação
+	 * @param pub - Objeto do tipo Publicacao a ser inserido
+	 * @return id da publicação inserida
+	 */
+	public int remove(int id_pub) {
+			String sql = "delete from publicacoes where id_pub = ?";
+			
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, id_pub);
+			stmt.executeUpdate();
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Não foi possível remover: id não encontrado");
+		            }
+		        }
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 }
