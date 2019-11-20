@@ -9,6 +9,7 @@ public class Artigo_anais {
 	private String titulo_congresso;
 	private Integer volume;
 	private Integer numero;
+	private Calendar data;
 	
 	public Integer getId_pub() {
 		return id_pub;
@@ -16,6 +17,14 @@ public class Artigo_anais {
 	public void setId_pub(Integer id_pub) {
 		this.id_pub = id_pub;
 	}
+	
+	public Calendar getdata() {
+		return data;
+	}
+	public void setdata(Calendar data) {
+		this.data = data;
+	}
+	
 	public Integer getId_artigo() {
 		return id_artigo;
 	}
@@ -40,12 +49,6 @@ public class Artigo_anais {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public Calendar getData() {
-		return data;
-	}
-	public void setData(Calendar data) {
-		this.data = data;
-	}
-	private Calendar data;
+
 
 }
