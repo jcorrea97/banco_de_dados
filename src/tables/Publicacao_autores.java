@@ -4,6 +4,7 @@ public class Publicacao_autores {
 	
 	private Integer id_pub;
 	private Integer id_autor;
+	
 	public Integer getId_pub() {
 		return id_pub;
 	}

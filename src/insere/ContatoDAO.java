@@ -14,7 +14,7 @@ public class ContatoDAO {
 	}
 	
 	public void adiciona(Contato contato) {
-		
+		// metodo de teste para inserir nessa table contatos
 		String sql = "insert into contatos (nome,email,endereco, datansci) values (?,?,?,?)";
 	try {
 		PreparedStatement stmt = connection.prepareStatement(sql);

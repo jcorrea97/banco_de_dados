@@ -3,7 +3,7 @@ package tables;
 public class Artigos {
 
 	private Integer id_artigo;
-	private Integer id_autor;
+	//private Integer id_autor;
 	private Integer id_periodico;
 	private Integer id_editora;
 	private String tipo_artigo;
@@ -11,7 +11,7 @@ public class Artigos {
 	private String titulo_artigo;
 	private Integer pg_inicial;
 	private Integer pg_final;
-	private Integer id_local;
+	//private Integer id_local;
 	
 	public Integer getId_artigo() {
 		return id_artigo;
@@ -19,12 +19,7 @@ public class Artigos {
 	public void setId_artigo(Integer id_artigo) {
 		this.id_artigo = id_artigo;
 	}
-	public Integer getId_autor() {
-		return id_autor;
-	}
-	public void setId_autor(Integer id_autor) {
-		this.id_autor = id_autor;
-	}
+
 	public Integer getId_periodico() {
 		return id_periodico;
 	}
@@ -67,12 +62,7 @@ public class Artigos {
 	public void setPg_final(Integer pg_final) {
 		this.pg_final = pg_final;
 	}
-	public Integer getId_local() {
-		return id_local;
-	}
-	public void setId_local(Integer id_local) {
-		this.id_local = id_local;
-	}
+	
 	
 	
 	

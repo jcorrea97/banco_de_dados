@@ -3,6 +3,7 @@ package tables;
 public class Autores {
 	private Integer id_autor;
 	private String nome_autor;
+	
 	public Integer getId_autor() {
 		return id_autor;
 	}
