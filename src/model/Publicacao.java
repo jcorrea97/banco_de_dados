@@ -38,4 +38,13 @@ public class Publicacao {
 	public void setLocal(String local) {
 		this.local_publicacao = local;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format(
+				"{ id_pub: %d, tipo_publicacao: %s , local_publicacao: %s }",
+				getId_pub(),
+				getTipo_publicacao(),
+				getLocal_publicacao());
+	}
 }

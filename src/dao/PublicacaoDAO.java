@@ -48,4 +48,33 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	}
+	
+	public Publicacao seleciona(int id_pub) {
+	
+			String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes where id_pub = ?";
+			
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id_pub);
+			stmt.execute();
+	
+			 try (ResultSet rs = stmt.getResultSet()) {
+		            if (rs.next()) {
+		            	Publicacao pub = new Publicacao (
+		            				rs.getString("local_publicacao"),
+		            				rs.getString("tipo_publicacao")
+		            			);
+		            	pub.setId_pub(rs.getInt("id_pub"));
+		            	return pub;
+		            }
+		            else {
+		                throw new SQLException("nenhuma publicação encontrada com o id passado: " + id_pub);
+		            }
+		        }
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
