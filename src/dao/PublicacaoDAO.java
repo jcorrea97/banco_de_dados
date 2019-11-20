@@ -122,14 +122,92 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 	
 	/**
+	 * Retorna um objeto do tipo publicação com o determinado ID
+	 * @param id_pub
+	 * @return Publicacao
+	 */
+	public List<Publicacao> selecionaPorTipo(String tipo_publicacao) {
+	
+			String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes where tipo_publicacao = '?'";
+			
+			PreparedStatement stmt;
+			try {
+				stmt = con.prepareStatement(sql);
+				stmt.setString(1, tipo_publicacao);
+				return executaSelecionaLista(stmt);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+	}
+	
+	public List<Publicacao> selecionaPorLocal(String local_publicacao) {
+		
+		String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes where local_publicacao = '?'";
+		
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, local_publicacao);
+			return executaSelecionaLista(stmt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+}
+	
+	/**
 	 * Lista todas as publicações presentes no Banco de dados, se nenhuma for encontrada retorna Null
 	 * @return List<Publicacao>
 	 */
 	public List<Publicacao> selecionaTudo() {
-		String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes";
 		
+		String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes";
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(sql);
+			return executaSelecionaLista(stmt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		
+	}
+
+	
+	
+	/**
+	 * Remove uma publicação
+	 * @param id
+	 * @return id da publicação removida
+	 */
+	public int remove(int id_pub) {
+			String sql = "delete from publicacoes where id_pub = ?";
+			
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, id_pub);
+			stmt.executeUpdate();
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Não foi possível remover: id não encontrado");
+		            }
+		        }
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	private List<Publicacao> executaSelecionaLista(PreparedStatement stmt) {
 		try {			
-			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.execute();	
 			 try (ResultSet rs = stmt.getResultSet()) {
 		            if (rs.next()) {
@@ -155,32 +233,6 @@ public class PublicacaoDAO extends GenericDAO{
 		}
 	}
 	
-	/**
-	 * Adiciona uma publicação
-	 * @param pub - Objeto do tipo Publicacao a ser inserido
-	 * @return id da publicação inserida
-	 */
-	public int remove(int id_pub) {
-			String sql = "delete from publicacoes where id_pub = ?";
-			
-		try {
-			
-			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, id_pub);
-			stmt.executeUpdate();
 	
-			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-		            if (generatedKeys.next()) {
-		               return generatedKeys.getInt(1);
-		            }
-		            else {
-		                throw new SQLException("Não foi possível remover: id não encontrado");
-		            }
-		        }
-			
-		}catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-	}
+	
 }
