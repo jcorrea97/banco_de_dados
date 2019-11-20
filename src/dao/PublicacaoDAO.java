@@ -62,8 +62,8 @@ public class PublicacaoDAO extends GenericDAO{
 			 try (ResultSet rs = stmt.getResultSet()) {
 		            if (rs.next()) {
 		            	Publicacao pub = new Publicacao (
-		            				rs.getString("local_publicacao"),
-		            				rs.getString("tipo_publicacao")
+		            				rs.getString("tipo_publicacao"),
+		            				rs.getString("local_publicacao")
 		            			);
 		            	pub.setId_pub(rs.getInt("id_pub"));
 		            	return pub;
