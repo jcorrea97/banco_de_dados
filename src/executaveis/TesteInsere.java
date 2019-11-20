@@ -10,8 +10,8 @@ public class TesteInsere {
 
 	public static void main(String[] args) {
 		PublicacaoDAO pub = new PublicacaoDAO();
-//		pub.adiciona("Artigo", "Itaquera");
-		System.out.println(pub.seleciona(1));
+		pub.adiciona("Livro", "Guaianases");
+		System.out.println(pub.selecionaTudo());
 	}
 
 }

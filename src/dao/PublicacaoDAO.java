@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import bd.ConnectionFactory;
 import model.Contato;
@@ -21,34 +23,75 @@ public class PublicacaoDAO extends GenericDAO{
 		super();
 	}
 	
+	/**
+	 * Adiciona uma publicação
+	 * @param tipo_publicacao_
+	 * @param local_publicacao_
+	 * @return id da publicação inserida
+	 */
 	public int adiciona(String tipo_publicacao_, String local_publicacao_) {
 		
-		Publicacao pub = new Publicacao(tipo_publicacao_, local_publicacao_);
-		
-		String sql = "insert into publicacoes (tipo_publicacao,local_publicacao) values (?,?)";
-	try {
-		
-		PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		
-		stmt.setString(1, pub.getTipo_publicacao());
-		stmt.setString(2, pub.getLocal_publicacao());
-		stmt.execute();
-
-		 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	               return generatedKeys.getInt(1);
-	            }
-	            else {
-	                throw new SQLException("Criar publicação falhou, nenhum ID obtido");
-	            }
-	        }
-		
-	}catch (SQLException e) {
-		throw new RuntimeException(e);
-	}
+			Publicacao pub = new Publicacao(tipo_publicacao_, local_publicacao_);
+			
+			String sql = "insert into publicacoes (tipo_publicacao,local_publicacao) values (?,?)";
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			stmt.setString(1, pub.getTipo_publicacao());
+			stmt.setString(2, pub.getLocal_publicacao());
+			stmt.execute();
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Criar publicação falhou, nenhum ID obtido");
+		            }
+		        }
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 	
+	/**
+	 * Adiciona uma publicação
+	 * @param pub - Objeto do tipo Publicacao a ser inserido
+	 * @return id da publicação inserida
+	 */
+	public int adiciona(Publicacao pub) {
+			String sql = "insert into publicacoes (tipo_publicacao,local_publicacao) values (?,?)";
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			stmt.setString(1, pub.getTipo_publicacao());
+			stmt.setString(2, pub.getLocal_publicacao());
+			stmt.execute();
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Criar publicação falhou, nenhum ID obtido");
+		            }
+		        }
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	/**
+	 * Retorna um objeto do tipo publicação com o determinado ID
+	 * @param id_pub
+	 * @return Publicacao
+	 */
 	public Publicacao seleciona(int id_pub) {
 	
 			String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes where id_pub = ?";
@@ -70,6 +113,40 @@ public class PublicacaoDAO extends GenericDAO{
 		            }
 		            else {
 		                throw new SQLException("nenhuma publicação encontrada com o id passado: " + id_pub);
+		            }
+		        }
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Lista todas as publicações presentes no Banco de dados, se nenhuma for encontrada retorna Null
+	 * @return List<Publicacao>
+	 */
+	public List<Publicacao> selecionaTudo() {
+		String sql = "select id_pub, local_publicacao, tipo_publicacao from publicacoes";
+		
+		try {			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.execute();	
+			 try (ResultSet rs = stmt.getResultSet()) {
+		            if (rs.next()) {
+		            	List<Publicacao> listaPubs = new ArrayList<Publicacao>();
+		            	do {
+		            	Publicacao pub = new Publicacao (
+		            				rs.getString("tipo_publicacao"),
+		            				rs.getString("local_publicacao")
+		            			);
+		            	pub.setId_pub(rs.getInt("id_pub"));
+		            	listaPubs.add(pub);
+		            	} 
+		            	while (rs.next());
+		            	return listaPubs;
+		            }
+		            else {
+		            	return null;
 		            }
 		        }
 			
