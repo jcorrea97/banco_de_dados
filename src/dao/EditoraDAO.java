@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bd.ConnectionFactory;
-import model.Contato;
-import model.Publicacao;
+
 import model.Editora;
 
 /**
