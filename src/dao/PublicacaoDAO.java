@@ -1,7 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import bd.ConnectionFactory;
-import model.Contato;
 import model.Publicacao;
 
 /**
- * DAO que gerencia seleções e inserções em publicacoes
+ * DAO que gerencia seleÃ§Ãµes e inserÃ§Ãµes em publicacoes
  *
  */
 public class PublicacaoDAO extends GenericDAO{
@@ -24,10 +20,10 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 	
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicaÃ§Ã£o
 	 * @param tipo_publicacao_
 	 * @param local_publicacao_
-	 * @return id da publicação inserida
+	 * @return id da publicaÃ§Ã£o inserida
 	 */
 	public int adiciona(String tipo_publicacao_, String local_publicacao_) {
 		
@@ -47,7 +43,7 @@ public class PublicacaoDAO extends GenericDAO{
 		               return generatedKeys.getInt(1);
 		            }
 		            else {
-		                throw new SQLException("Criar publicação falhou, nenhum ID obtido");
+		                throw new SQLException("Criar publicaÃ§Ã£o falhou, nenhum ID obtido");
 		            }
 		        }
 			
@@ -58,9 +54,9 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 	
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicaÃ§Ã£o
 	 * @param pub - Objeto do tipo Publicacao a ser inserido
-	 * @return id da publicação inserida
+	 * @return id da publicaÃ§Ã£o inserida
 	 */
 	public int adiciona(Publicacao pub) {
 			String sql = "insert into publicacoes (tipo_publicacao,local_publicacao) values (?,?)";
@@ -77,7 +73,7 @@ public class PublicacaoDAO extends GenericDAO{
 		               return generatedKeys.getInt(1);
 		            }
 		            else {
-		                throw new SQLException("Criar publicação falhou, nenhum ID obtido");
+		                throw new SQLException("Criar publicaÃ§Ã£o falhou, nenhum ID obtido");
 		            }
 		        }
 			
@@ -88,7 +84,7 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 	
 	/**
-	 * Retorna um objeto do tipo publicação com o determinado ID
+	 * Retorna um objeto do tipo publicaÃ§Ã£o com o determinado ID
 	 * @param id_pub
 	 * @return Publicacao
 	 */
@@ -112,7 +108,7 @@ public class PublicacaoDAO extends GenericDAO{
 		            	return pub;
 		            }
 		            else {
-		                throw new SQLException("nenhuma publicação encontrada com o id passado: " + id_pub);
+		                throw new SQLException("nenhuma publicaÃ§Ã£o encontrada com o id passado: " + id_pub);
 		            }
 		        }
 			
@@ -122,7 +118,7 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 	
 	/**
-	 * Lista todas as publicações presentes no Banco de dados, se nenhuma for encontrada retorna Null
+	 * Lista todas as publicaÃ§Ã£es presentes no Banco de dados, se nenhuma for encontrada retorna Null
 	 * @return List<Publicacao>
 	 */
 	public List<Publicacao> selecionaTudo() {
@@ -156,9 +152,9 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 	
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicaÃ§Ã£o
 	 * @param pub - Objeto do tipo Publicacao a ser inserido
-	 * @return id da publicação inserida
+	 * @return id da publicaÃ§Ã£o inserida
 	 */
 	public int remove(int id_pub) {
 			String sql = "delete from publicacoes where id_pub = ?";
@@ -174,7 +170,7 @@ public class PublicacaoDAO extends GenericDAO{
 		               return generatedKeys.getInt(1);
 		            }
 		            else {
-		                throw new SQLException("Não foi possível remover: id não encontrado");
+		                throw new SQLException("Nï¿½o foi possï¿½vel remover: id nï¿½o encontrado");
 		            }
 		        }
 			
