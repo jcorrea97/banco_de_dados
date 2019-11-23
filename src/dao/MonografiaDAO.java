@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import bd.ConnectionFactory;
 import model.Contato;
 
-public class MonografiasDAO {
+public class MonografiaDAO {
 private Connection connection;
 	
-	public MonografiasDAO() {
+	public MonografiaDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
 	

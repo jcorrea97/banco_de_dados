@@ -1,11 +1,22 @@
 package model;
 
+import java.util.List;
+
 public class Publicacao {
 	
 	private Integer id_pub;
 	private String tipo_publicacao;
 	private String local_publicacao;
+	private List<Autor> autores; 
 	
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+	}
+
 	/**
 	 * Cria um novo objeto do tipo publicação
 	 * @param tipo_publicacao_
@@ -41,6 +52,14 @@ public class Publicacao {
 	
 	@Override
 	public String toString() {
+		if(autores != null) {
+			return String.format(
+					"{ id_pub: %d, tipo_publicacao: %s , local_publicacao: %s, autores: %s }",
+					getId_pub(),
+					getTipo_publicacao(),
+					getLocal_publicacao(),
+					getAutores());
+		}
 		return String.format(
 				"{ id_pub: %d, tipo_publicacao: %s , local_publicacao: %s }",
 				getId_pub(),

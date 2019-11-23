@@ -1,16 +1,17 @@
 package executaveis;
 
 import dao.PublicacaoDAO;
-
+import model.Autor;;
 
 public class TesteInsere {
 
 	public static void main(String[] args) {
-		PublicacaoDAO pub = new PublicacaoDAO();
-//		pub.adiciona("Livro", "Guaianases");
-	System.out.println(pub.remove(2));
-		System.out.println(pub.selecionaTudo());
 
+		PublicacaoDAO pubs = new PublicacaoDAO();
+//		pubs.adicionaAutorNovoAPublicacao(new Autor("Jose de Alencar"), 4);
+//		System.out.println(pubs.selecionaTudo());
+		System.out.println(pubs.selecionaComAutores(4));
+		
 	}
 
 }

@@ -1,7 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import bd.ConnectionFactory;
-import model.Contato;
+import model.Autor;
 import model.Publicacao;
 
 /**
- * DAO que gerencia seleções e inserções em publicacoes
+ * DAO que gerencia selecoes e insercoes em publicacoes
  *
  */
 public class PublicacaoDAO extends GenericDAO{
@@ -24,10 +21,10 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicacao
 	 * @param tipo_publicacao_
 	 * @param local_publicacao_
-	 * @return id da publicação inserida
+	 * @return id da publicacao inserida
 	 */
 	public int adiciona(String tipo_publicacao_, String local_publicacao_) {
 
@@ -41,16 +38,16 @@ public class PublicacaoDAO extends GenericDAO{
 			stmt.setString(1, pub.getTipo_publicacao());
 			stmt.setString(2, pub.getLocal_publicacao());
 			stmt.execute();
-
-			try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-				if (generatedKeys.next()) {
-					return generatedKeys.getInt(1);
-				}
-				else {
-					throw new SQLException("Criar publicação falhou, nenhum ID obtido");
-				}
-			}
-
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Criar publicacao falhou, nenhum ID obtido");
+		            }
+		        }
+			
 		}catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -58,9 +55,9 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicacao
 	 * @param pub - Objeto do tipo Publicacao a ser inserido
-	 * @return id da publicação inserida
+	 * @return id da publicacao inserida
 	 */
 	public int adiciona(Publicacao pub) {
 		String sql = "insert into publicacoes (tipo_publicacao,local_publicacao) values (?,?)";
@@ -71,16 +68,16 @@ public class PublicacaoDAO extends GenericDAO{
 			stmt.setString(1, pub.getTipo_publicacao());
 			stmt.setString(2, pub.getLocal_publicacao());
 			stmt.execute();
-
-			try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-				if (generatedKeys.next()) {
-					return generatedKeys.getInt(1);
-				}
-				else {
-					throw new SQLException("Criar publicação falhou, nenhum ID obtido");
-				}
-			}
-
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Criar publicaÃ§Ã£o falhou, nenhum ID obtido");
+		            }
+		        }
+			
 		}catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -88,7 +85,7 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Retorna um objeto do tipo publicação com o determinado ID
+	 * Retorna um objeto do tipo publicacao com o determinado ID
 	 * @param id_pub
 	 * @return Publicacao
 	 */
@@ -101,21 +98,21 @@ public class PublicacaoDAO extends GenericDAO{
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id_pub);
 			stmt.execute();
-
-			try (ResultSet rs = stmt.getResultSet()) {
-				if (rs.next()) {
-					Publicacao pub = new Publicacao (
-							rs.getString("tipo_publicacao"),
-							rs.getString("local_publicacao")
-							);
-					pub.setId_pub(rs.getInt("id_pub"));
-					return pub;
-				}
-				else {
-					throw new SQLException("nenhuma publicação encontrada com o id passado: " + id_pub);
-				}
-			}
-
+	
+			 try (ResultSet rs = stmt.getResultSet()) {
+		            if (rs.next()) {
+		            	Publicacao pub = new Publicacao (
+		            				rs.getString("tipo_publicacao"),
+		            				rs.getString("local_publicacao")
+		            			);
+		            	pub.setId_pub(rs.getInt("id_pub"));
+		            	return pub;
+		            }
+		            else {
+		                throw new SQLException("nenhuma publicaÃ§Ã£o encontrada com o id passado: " + id_pub);
+		            }
+		        }
+			
 		}catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -162,7 +159,7 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Lista todas as publicações presentes no Banco de dados, se nenhuma for encontrada retorna Null
+	 * Lista todas as publicacao presentes no Banco de dados, se nenhuma for encontrada retorna null
 	 * @return List<Publicacao>
 	 */
 	public List<Publicacao> selecionaTudo() {
@@ -183,9 +180,9 @@ public class PublicacaoDAO extends GenericDAO{
 
 
 	/**
-	 * Remove uma publicação
-	 * @param id
-	 * @return id da publicação removida
+	 * Adiciona uma publicacao
+	 * @param pub - Objeto do tipo Publicacao a ser inserido
+	 * @return id da publicacao inserida
 	 */
 	public int remove(int id_pub) {
 		String sql = "delete from publicacoes where id_pub = ?";
@@ -195,21 +192,66 @@ public class PublicacaoDAO extends GenericDAO{
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, id_pub);
 			stmt.executeUpdate();
-
-			try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-				if (generatedKeys.next()) {
-					return generatedKeys.getInt(1);
-				}
-				else {
-					throw new SQLException("Não foi possível remover: id não encontrado");
-				}
-			}
-
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("NÃ£o foi possivel remover: id nao encontrado");
+		            }
+		        }
+			
 		}catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 
 	}
+	
+	/**
+	 * Cria um novo autor e o adiciona a publicacao com o id passado
+	 * @param autor objeto autor a ser adicionado
+	 * @param id_pub publicacao a receber o autor adicionado
+	 * @return
+	 */
+	public Autor adicionaAutorNovoAPublicacao (Autor autor, int id_pub) {
+		try {
+			con.setAutoCommit(false);
+			try {
+				AutoresDAO autores = new AutoresDAO(con);
+				int id_autor = autores.adiciona(autor);
+				PublicacoesAutoresDAO linker = new PublicacoesAutoresDAO(con);
+				linker.link(id_pub , id_autor);
+				con.commit();
+				autor.setId_autor(id_autor);
+				return autor;
+			} catch (Exception e) {
+				con.setAutoCommit(true);
+				e.printStackTrace();
+			}
+			con.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;		
+	}
+	
+	public Publicacao selecionaComAutores(int id_pub) {
+			try {
+				Publicacao pub = seleciona(id_pub);
+				PublicacoesAutoresDAO linker = new PublicacoesAutoresDAO(con);
+				List<Autor> autores = linker.pegaAutores(id_pub);
+				if(autores != null && autores.size()>0) {
+					pub.setAutores(autores);
+				}
+				return pub;
+				
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}
+		return null;	
+	}
+	
 
 	private List<Publicacao> executaSelecionaLista(PreparedStatement stmt) {
 		try {			

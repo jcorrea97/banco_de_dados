@@ -5,6 +5,12 @@ public class Capitulo {
 	private Integer id_capitulo;
 	private Integer id_livro;
 	private Integer capitulo; // int ou varchar (no modelo ta varchar)
+	
+	public Capitulo(int id_livro, int capitulo){
+		setId_livro(id_livro);
+		setCapitulo(capitulo);
+	}
+	
 	public Integer getId_capitulo() {
 		return id_capitulo;
 	}
