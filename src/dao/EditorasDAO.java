@@ -17,9 +17,9 @@ import model.Editora;
  * DAO que gerencia sele��es e inser��es em publicacoes
  *
  */
-public class EditoraDAO extends GenericDAO{
+public class EditorasDAO extends GenericDAO{
 	
-	public EditoraDAO() {
+	public EditorasDAO() {
 		super();
 	}
 	

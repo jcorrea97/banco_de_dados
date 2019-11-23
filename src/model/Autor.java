@@ -1,8 +1,13 @@
 package model;
 
-public class Autore {
+public class Autor {
 	private Integer id_autor;
 	private String nome_autor;
+	
+	public Autor (String nome_autor) {
+		this.setNome_autor(nome_autor);
+	}
+	
 	public Integer getId_autor() {
 		return id_autor;
 	}
