@@ -12,5 +12,13 @@ public class GenericDAO {
 		this.con = new ConnectionFactory().getConnection();
 	}
 	
+	public GenericDAO(Connection con) {
+		this.con = con;
+	}
+	
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+	
 	
 }

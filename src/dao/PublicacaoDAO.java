@@ -7,10 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Autor;
 import model.Publicacao;
 
 /**
- * DAO que gerencia seleções e inserções em publicacoes
+ * DAO que gerencia selecoes e insercoes em publicacoes
  *
  */
 public class PublicacaoDAO extends GenericDAO{
@@ -20,10 +21,10 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicacao
 	 * @param tipo_publicacao_
 	 * @param local_publicacao_
-	 * @return id da publicação inserida
+	 * @return id da publicacao inserida
 	 */
 	public int adiciona(String tipo_publicacao_, String local_publicacao_) {
 
@@ -43,7 +44,7 @@ public class PublicacaoDAO extends GenericDAO{
 		               return generatedKeys.getInt(1);
 		            }
 		            else {
-		                throw new SQLException("Criar publicação falhou, nenhum ID obtido");
+		                throw new SQLException("Criar publicacao falhou, nenhum ID obtido");
 		            }
 		        }
 			
@@ -54,9 +55,9 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicacao
 	 * @param pub - Objeto do tipo Publicacao a ser inserido
-	 * @return id da publicação inserida
+	 * @return id da publicacao inserida
 	 */
 	public int adiciona(Publicacao pub) {
 		String sql = "insert into publicacoes (tipo_publicacao,local_publicacao) values (?,?)";
@@ -84,7 +85,7 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Retorna um objeto do tipo publicação com o determinado ID
+	 * Retorna um objeto do tipo publicacao com o determinado ID
 	 * @param id_pub
 	 * @return Publicacao
 	 */
@@ -158,7 +159,7 @@ public class PublicacaoDAO extends GenericDAO{
 	}
 
 	/**
-	 * Lista todas as publicaçães presentes no Banco de dados, se nenhuma for encontrada retorna Null
+	 * Lista todas as publicacao presentes no Banco de dados, se nenhuma for encontrada retorna null
 	 * @return List<Publicacao>
 	 */
 	public List<Publicacao> selecionaTudo() {
@@ -179,9 +180,9 @@ public class PublicacaoDAO extends GenericDAO{
 
 
 	/**
-	 * Adiciona uma publicação
+	 * Adiciona uma publicacao
 	 * @param pub - Objeto do tipo Publicacao a ser inserido
-	 * @return id da publicação inserida
+	 * @return id da publicacao inserida
 	 */
 	public int remove(int id_pub) {
 		String sql = "delete from publicacoes where id_pub = ?";
@@ -197,7 +198,7 @@ public class PublicacaoDAO extends GenericDAO{
 		               return generatedKeys.getInt(1);
 		            }
 		            else {
-		                throw new SQLException("Não foi possível remover: id não encontrado");
+		                throw new SQLException("Não foi possivel remover: id nao encontrado");
 		            }
 		        }
 			
@@ -206,6 +207,51 @@ public class PublicacaoDAO extends GenericDAO{
 		}
 
 	}
+	
+	/**
+	 * Cria um novo autor e o adiciona a publicacao com o id passado
+	 * @param autor objeto autor a ser adicionado
+	 * @param id_pub publicacao a receber o autor adicionado
+	 * @return
+	 */
+	public Autor adicionaAutorNovoAPublicacao (Autor autor, int id_pub) {
+		try {
+			con.setAutoCommit(false);
+			try {
+				AutoresDAO autores = new AutoresDAO(con);
+				int id_autor = autores.adiciona(autor);
+				PublicacoesAutoresDAO linker = new PublicacoesAutoresDAO(con);
+				linker.link(id_pub , id_autor);
+				con.commit();
+				autor.setId_autor(id_autor);
+				return autor;
+			} catch (Exception e) {
+				con.setAutoCommit(true);
+				e.printStackTrace();
+			}
+			con.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;		
+	}
+	
+	public Publicacao selecionaComAutores(int id_pub) {
+			try {
+				Publicacao pub = seleciona(id_pub);
+				PublicacoesAutoresDAO linker = new PublicacoesAutoresDAO(con);
+				List<Autor> autores = linker.pegaAutores(id_pub);
+				if(autores != null && autores.size()>0) {
+					pub.setAutores(autores);
+				}
+				return pub;
+				
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}
+		return null;	
+	}
+	
 
 	private List<Publicacao> executaSelecionaLista(PreparedStatement stmt) {
 		try {			

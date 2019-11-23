@@ -21,6 +21,13 @@ public class Autor {
 		this.nome_autor = nome_autor;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.format("{ nome_autor: %s , id_autor: %d }", 
+				getNome_autor(), 
+				getId_autor());
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,11 @@ public class AutoresDAO extends GenericDAO{
 	
 	public AutoresDAO() {
 		super();
+	}
+	
+	public AutoresDAO(Connection con) {
+		super(con);
+		
 	}
 	
 	public int adiciona(Autor autor) {		
