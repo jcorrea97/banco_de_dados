@@ -14,9 +14,9 @@ import model.Publicacao;
  * DAO que gerencia selecoes e insercoes em publicacoes
  *
  */
-public class PublicacaoDAO extends GenericDAO{
+public class PublicacoesDAO extends GenericDAO{
 
-	public PublicacaoDAO() {
+	public PublicacoesDAO() {
 		super();
 	}
 
