@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 /**
  * Base para as tabs do programa, de inicio cada tab representa algo que o cliente ira quere utilizar
- * @author Kaka e Fefe SSD
+ * 
  *
  */
 public class GenericTab {
