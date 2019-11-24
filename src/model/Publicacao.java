@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Publicacao {
@@ -8,7 +9,47 @@ public class Publicacao {
 	private String tipo_publicacao;
 	private String local_publicacao;
 	private List<Autor> autores; 
+	private Date data;
+	private Integer id_emprestimo_pub;
+	private String tema_publicacao;
+	private String titulo_publicacao;
 	
+	public String getTema_publicacao() {
+		return tema_publicacao;
+	}
+
+	public void setTema_publicacao(String tema_publicacao) {
+		this.tema_publicacao = tema_publicacao;
+	}
+
+	public String getTitulo_publicacao() {
+		return titulo_publicacao;
+	}
+
+	public void setTitulo_publicacao(String titulo_publicacao) {
+		this.titulo_publicacao = titulo_publicacao;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Integer getId_emprestimo_pub() {
+		return id_emprestimo_pub;
+	}
+
+	public void setId_emprestimo_pub(Integer id_emprestimo_pub) {
+		this.id_emprestimo_pub = id_emprestimo_pub;
+	}
+
+	public void setLocal_publicacao(String local_publicacao) {
+		this.local_publicacao = local_publicacao;
+	}
+
 	public List<Autor> getAutores() {
 		return autores;
 	}

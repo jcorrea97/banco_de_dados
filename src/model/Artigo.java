@@ -12,7 +12,14 @@ public class Artigo {
 	private Integer pg_inicial;
 	private Integer pg_final;
 	private Integer id_local;
+	private Integer id_artigo_anais;
 	
+	public Integer getId_artigo_anais() {
+		return id_artigo_anais;
+	}
+	public void setId_artigo_anais(Integer id_artigo_anais) {
+		this.id_artigo_anais = id_artigo_anais;
+	}
 	public Integer getId_artigo() {
 		return id_artigo;
 	}
