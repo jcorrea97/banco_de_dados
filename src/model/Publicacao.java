@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Publicacao {
@@ -7,6 +8,9 @@ public class Publicacao {
 	private Integer id_pub;
 	private String tipo_publicacao;
 	private String local_publicacao;
+	private String titulo_publicacao;
+	private String tema_publicacao;
+	private Date data;
 	private List<Autor> autores; 
 	
 	public List<Autor> getAutores() {
@@ -22,7 +26,13 @@ public class Publicacao {
 	 * @param tipo_publicacao_
 	 * @param local_publicacao_
 	 */
-	public Publicacao(String tipo_publicacao_, String local_publicacao_){
+	public Publicacao(
+			String tipo_publicacao_,
+			String local_publicacao_,
+			String titulo_publicacao_,
+			String tema_publicacao_){
+		setTitulo_publicacao(titulo_publicacao_);
+		setTema_publicacao(tema_publicacao_);
 		setLocal(local_publicacao_);
 		setTipo_publicacao(tipo_publicacao_);
 	}
@@ -65,5 +75,29 @@ public class Publicacao {
 				getId_pub(),
 				getTipo_publicacao(),
 				getLocal_publicacao());
+	}
+
+	public String getTitulo_publicacao() {
+		return titulo_publicacao;
+	}
+
+	public void setTitulo_publicacao(String titulo) {
+		this.titulo_publicacao = titulo;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public String getTema_publicacao() {
+		return tema_publicacao;
+	}
+
+	public void setTema_publicacao(String tema_publicacao) {
+		this.tema_publicacao = tema_publicacao;
 	}
 }

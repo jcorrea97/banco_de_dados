@@ -17,8 +17,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.Publicacao;
-import view.graphical_interface.popups.publicacoes_tabs.InsertPopup;
 import view.API;
+import view.graphical_interface.popups.InsertMonografia;
 
 public class PublicacoesTab extends GenericTab{
 	
@@ -30,7 +30,7 @@ public class PublicacoesTab extends GenericTab{
 			
 		JTable table = new JTable(
 			new DefaultTableModel(
-			new Object[]{"id_pub", "local_pub", "tipo_pub"}, 0
+			new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao"}, 0
 			)
 		);
 		
@@ -54,7 +54,9 @@ public class PublicacoesTab extends GenericTab{
 				   model.addRow(new Object[]{
 						   pub.getId_pub(), 
 						   pub.getLocal_publicacao(), 
-						   pub.getTipo_publicacao()
+						   pub.getTipo_publicacao(),
+						   pub.getTema_publicacao(),
+						   pub.getTitulo_publicacao()
 						   }
 				   );
 				   
@@ -70,7 +72,7 @@ public class PublicacoesTab extends GenericTab{
 		{
 			  public void actionPerformed(ActionEvent e)
 			  {
-				  InsertPopup.executar();			   
+				  InsertMonografia.executar();			   
 			  }
 			}
 		);

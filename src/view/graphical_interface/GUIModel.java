@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 
+import view.graphical_interface.tabs.MonografiasTab;
 import view.graphical_interface.tabs.PublicacoesTab;
 
 import javax.swing.JButton;
@@ -59,25 +60,55 @@ public class GUIModel {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane);
 		
-		JSplitPane splitPane = new JSplitPane();
-		tabbedPane.addTab("Publica\u00E7\u00F5es", null, splitPane, null);
+		JSplitPane publicacoesTab = new JSplitPane();
+		tabbedPane.addTab("Publica\u00E7\u00F5es", null, publicacoesTab, null);
 		
-		configPublicacoesTab(splitPane);
+		JSplitPane monografiasTab = new JSplitPane();
+		tabbedPane.addTab("Monografias", null, monografiasTab, null);
+		
+		
+		
+		configPublicacoesTab(publicacoesTab);
+		configMonografiasTab(monografiasTab);
 	
 		
 	}
 
-	private void configPublicacoesTab(JSplitPane splitPane) {
+	private void configMonografiasTab(JSplitPane monografiasTab) {
+		JScrollPane resultados_monografia_container = new JScrollPane();
+		monografiasTab.setRightComponent(resultados_monografia_container);
+		
+		JTable resultadosTable;
+		resultadosTable = MonografiasTab.configResultadosTable();
+		resultados_monografia_container.setViewportView(resultadosTable);
+		
+		Box verticalBox = Box.createVerticalBox();
+		monografiasTab.setLeftComponent(verticalBox);
+		
+		JButton btnListarMonografias = new JButton("Listar Monografias");
+		verticalBox.add(btnListarMonografias);
+		
+		JButton btnInserirMonografia = new JButton("Inserir Monografia");
+		verticalBox.add(btnInserirMonografia);
+		
+		MonografiasTab monsTab = new MonografiasTab(frame);
+		
+		monsTab.configBtnListarMonografias(btnListarMonografias, resultadosTable);
+		monsTab.configBtnInserirMonografia(btnInserirMonografia);
+		
+	}
+
+	private void configPublicacoesTab(JSplitPane publicacoesTab) {
 		
 		JScrollPane resultados_publicacoes_container = new JScrollPane();
-		splitPane.setRightComponent(resultados_publicacoes_container);
+		publicacoesTab.setRightComponent(resultados_publicacoes_container);
 		
 		JTable resultadosTable;
 		resultadosTable = PublicacoesTab.configResultadosTable();
 		resultados_publicacoes_container.setViewportView(resultadosTable);
 		
 		Box verticalBox = Box.createVerticalBox();
-		splitPane.setLeftComponent(verticalBox);
+		publicacoesTab.setLeftComponent(verticalBox);
 		
 		JButton btnListarPublicacoes = new JButton("Listar Publica\u00E7\u00F5es");
 		verticalBox.add(btnListarPublicacoes);
