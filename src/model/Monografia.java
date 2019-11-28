@@ -2,13 +2,16 @@ package model;
 
 import java.util.Calendar;
 
-public class Monografia {
+public class Monografia extends Publicacao{
 	private Integer id_monografia;
 	private Integer numero_monog;
 	private String nome_instituicao;
-	private Calendar data;
+//	private Calendar data;
 	private String titulo;
 	
+	public Monografia() {
+		setTipo_publicacao("monografia");
+	}
 	
 	public Integer getId() {
 		return id_monografia;
@@ -28,12 +31,12 @@ public class Monografia {
 	public void setNome_instituicao(String nome_instituicao) {
 		this.nome_instituicao = nome_instituicao;
 	}
-	public Calendar getData() {
-		return data;
-	}
-	public void setData(Calendar data) {
-		this.data = data;
-	}
+//	public Calendar getData() {
+//		return data;
+//	}
+//	public void setData(Calendar data) {
+//		this.data = data;
+//	}
 	public String getTitulo() {
 		return titulo;
 	}
