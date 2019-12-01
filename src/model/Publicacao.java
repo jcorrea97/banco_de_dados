@@ -8,35 +8,16 @@ public class Publicacao {
 	private Integer id_pub;
 	private String tipo_publicacao;
 	private String local_publicacao;
-	private List<Autor> autores; 
 	private Date data;
 	private Integer id_emprestimo_pub;
 	private String tema_publicacao;
 	private String titulo_publicacao;
+	private List<Autor> autores;
+	private int id_autor = -1; 
+	private String nome_autor = "";
 	
-	public String getTema_publicacao() {
-		return tema_publicacao;
-	}
+	
 
-	public void setTema_publicacao(String tema_publicacao) {
-		this.tema_publicacao = tema_publicacao;
-	}
-
-	public String getTitulo_publicacao() {
-		return titulo_publicacao;
-	}
-
-	public void setTitulo_publicacao(String titulo_publicacao) {
-		this.titulo_publicacao = titulo_publicacao;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
 
 	public Integer getId_emprestimo_pub() {
 		return id_emprestimo_pub;
@@ -59,11 +40,17 @@ public class Publicacao {
 	}
 
 	/**
-	 * Cria um novo objeto do tipo publicação
+	 * Cria um novo objeto do tipo publicaï¿½ï¿½o
 	 * @param tipo_publicacao_
 	 * @param local_publicacao_
 	 */
-	public Publicacao(String tipo_publicacao_, String local_publicacao_){
+	public Publicacao(
+			String tipo_publicacao_,
+			String local_publicacao_,
+			String titulo_publicacao_,
+			String tema_publicacao_){
+		setTitulo_publicacao(titulo_publicacao_);
+		setTema_publicacao(tema_publicacao_);
 		setLocal(local_publicacao_);
 		setTipo_publicacao(tipo_publicacao_);
 	}
@@ -106,5 +93,45 @@ public class Publicacao {
 				getId_pub(),
 				getTipo_publicacao(),
 				getLocal_publicacao());
+	}
+
+	public String getTitulo_publicacao() {
+		return titulo_publicacao;
+	}
+
+	public void setTitulo_publicacao(String titulo) {
+		this.titulo_publicacao = titulo;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public String getTema_publicacao() {
+		return tema_publicacao;
+	}
+
+	public void setTema_publicacao(String tema_publicacao) {
+		this.tema_publicacao = tema_publicacao;
+	}
+
+	public String getNome_autor() {
+		return nome_autor;
+	}
+
+	public void setNome_autor(String nome_autor) {
+		this.nome_autor = nome_autor;
+	}
+
+	public int getId_autor() {
+		return id_autor;
+	}
+
+	public void setId_autor(int id_autor) {
+		this.id_autor = id_autor;
 	}
 }
