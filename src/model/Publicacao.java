@@ -11,7 +11,9 @@ public class Publicacao {
 	private String titulo_publicacao;
 	private String tema_publicacao;
 	private Date data;
-	private List<Autor> autores; 
+	private List<Autor> autores;
+	private int id_autor = -1; 
+	private String nome_autor = "";
 	
 	public List<Autor> getAutores() {
 		return autores;
@@ -99,5 +101,21 @@ public class Publicacao {
 
 	public void setTema_publicacao(String tema_publicacao) {
 		this.tema_publicacao = tema_publicacao;
+	}
+
+	public String getNome_autor() {
+		return nome_autor;
+	}
+
+	public void setNome_autor(String nome_autor) {
+		this.nome_autor = nome_autor;
+	}
+
+	public int getId_autor() {
+		return id_autor;
+	}
+
+	public void setId_autor(int id_autor) {
+		this.id_autor = id_autor;
 	}
 }

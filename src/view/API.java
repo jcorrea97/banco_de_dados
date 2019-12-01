@@ -38,5 +38,10 @@ public class API {
 		mons = new MonografiasDAO();
 		return mons.adiciona(mon);
 	}
+
+	public static List<Publicacao> listarPublicacoesAutores() {
+		pubs = new PublicacoesDAO();
+		return pubs.selecionaTudoComAutores();
+	}
 	
 }

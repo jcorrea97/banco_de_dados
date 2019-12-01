@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 
@@ -19,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+
 import javax.swing.JTable;
 
 public class GUIModel {
@@ -53,7 +57,10 @@ public class GUIModel {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(600, 200, 750, 500);
+		frame.setSize(900, 600);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+//		frame.setBounds(600, 200, 750, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -98,6 +105,10 @@ public class GUIModel {
 		
 	}
 
+	/**
+	 * Funcao responsavel por cuidar da aba de publicacoes
+	 * @param publicacoesTab
+	 */
 	private void configPublicacoesTab(JSplitPane publicacoesTab) {
 		
 		JScrollPane resultados_publicacoes_container = new JScrollPane();
@@ -113,12 +124,16 @@ public class GUIModel {
 		JButton btnListarPublicacoes = new JButton("Listar Publica\u00E7\u00F5es");
 		verticalBox.add(btnListarPublicacoes);
 		
+		JButton btnListarPublicacoesAutores = new JButton("Listar Publica\u00E7\u00F5es com autores");
+		verticalBox.add(btnListarPublicacoesAutores);
+		
 		JButton btnInserirPublicacao = new JButton("Inserir Publica\u00E7\u00E3o");
 		verticalBox.add(btnInserirPublicacao);
 		
 		PublicacoesTab pubsTab = new PublicacoesTab(frame);
 		
 		pubsTab.configBtnListarPublicacoes(btnListarPublicacoes, resultadosTable);
+		pubsTab.configBtnListarPublicacoesAutor(btnListarPublicacoesAutores, resultadosTable);
 		pubsTab.configBtnInserirPublicacao(btnInserirPublicacao);
 
 	

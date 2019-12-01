@@ -39,6 +39,24 @@ public class PublicacoesTab extends GenericTab{
 
  		return table;
 	}
+	
+	
+	
+	public static JTable configResultadosTable(Object[] rows) {
+		
+		JTable table = new JTable(
+			new DefaultTableModel(
+			rows, 0
+			)
+		);
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+		table.setRowSorter(sorter);
+
+ 		return table;
+	}
+	
+	
 
 	public void configBtnListarPublicacoes(JButton btnListarPublicacoes, JTable resultados_table) {
 		btnListarPublicacoes.addActionListener(new ActionListener()
@@ -67,6 +85,36 @@ public class PublicacoesTab extends GenericTab{
 		);
 	}
 
+	public void configBtnListarPublicacoesAutor(JButton btnListarPublicacoesAutores, JTable resultados_table) {
+		btnListarPublicacoesAutores.addActionListener(new ActionListener()
+		{
+			  public void actionPerformed(ActionEvent e)
+			  {
+				configResultadosTable(new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao", "nome_autor", "id_autor"});
+			   List<Publicacao> publicacoes = API.listarPublicacoesAutores();
+			   DefaultTableModel model = (DefaultTableModel) resultados_table.getModel();
+			   model.setRowCount(0);
+			   
+			   for(Publicacao pub : publicacoes) {
+				 
+				   model.addRow(new Object[]{
+						   pub.getId_pub(), 
+						   pub.getLocal_publicacao(), 
+						   pub.getTipo_publicacao(),
+						   pub.getTema_publicacao(),
+						   pub.getTitulo_publicacao(),
+						   pub.getNome_autor(),
+						   pub.getId_autor()
+						   }
+				   );
+				   
+			   }
+			   
+			  }
+			}
+		);
+	}
+	
 	public void configBtnInserirPublicacao(JButton btnListarPublicacoes) {
 		btnListarPublicacoes.addActionListener(new ActionListener()
 		{
@@ -77,4 +125,5 @@ public class PublicacoesTab extends GenericTab{
 			}
 		);
 	}
+
 }

@@ -264,6 +264,22 @@ public class PublicacoesDAO extends GenericDAO{
 		return null;	
 	}
 	
+	public List<Publicacao> selecionaTudoComAutores() {
+		
+		String sql = "select p.*, a.* from publicacoes p " + 
+				"left outer join publicacoes_autores pa on " + 
+				"p.id_pub = (select p1.id_pub from publicacoes_autores as p1 where p.id_pub = p1.id_pub limit 1) " + 
+				"join autores a on (a.id_autor = pa.id_autor) ";
+		
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			return executaSelecionaLista(stmt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}	
+	}
+	
 
 	private List<Publicacao> executaSelecionaLista(PreparedStatement stmt) {
 		try {			
@@ -278,6 +294,15 @@ public class PublicacoesDAO extends GenericDAO{
 								rs.getString("titulo_publicacao"),
 								rs.getString("tema_publicacao")
 								);
+						try {
+							String nome_autor = rs.getString("nome_autor");
+							int id_autor = rs.getInt("id_autor");
+							pub.setNome_autor(nome_autor);
+							pub.setId_autor(id_autor);
+							
+						} catch (Exception e) {
+							System.out.println("Publicacao sem autor");
+						}
 						pub.setId_pub(rs.getInt("id_pub"));
 						listaPubs.add(pub);
 					} 
