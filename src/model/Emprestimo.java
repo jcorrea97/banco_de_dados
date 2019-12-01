@@ -4,6 +4,9 @@ public class Emprestimo {
 	private Integer id_emprestimo;
 	private String publicacao_emprestimo;
 	
+	public Emprestimo(String publicacao_emprestimo2) {
+		setPublicacao_emprestimo(publicacao_emprestimo2);
+		}
 	public Integer getId_emprestimo() {
 		return id_emprestimo;
 	}
