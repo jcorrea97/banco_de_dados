@@ -12,6 +12,7 @@ import javax.swing.JToolBar;
 
 import model.Autor;
 import view.API;
+import view.graphical_interface.tabs.ArtigosTab;
 import view.graphical_interface.tabs.MonografiasTab;
 import view.graphical_interface.tabs.PublicacoesTab;
 
@@ -26,11 +27,14 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JTable;
+import java.awt.Color;
 
 public class GUIModel {
 
 	private JFrame frame;
 	JTable publicacaoResultadosTable;
+	JTable monografiasResultadosTable;
+	JTable artigosResultadosTable;
 
 	/**
 	 * Launch the application.
@@ -77,21 +81,50 @@ public class GUIModel {
 		JSplitPane monografiasTab = new JSplitPane();
 		tabbedPane.addTab("Monografias", null, monografiasTab, null);
 		
+		JSplitPane artigosTab = new JSplitPane();
+		tabbedPane.addTab("Artigos", null, artigosTab, null);
+		
 		
 		
 		configPublicacoesTab(publicacoesTab);
 		configMonografiasTab(monografiasTab);
+		configArtigosTab(artigosTab);
 	
 		
+	}
+
+	private void configArtigosTab(JSplitPane artigosTab) {
+		JScrollPane resultados_artigos_container = new JScrollPane();
+		artigosTab.setRightComponent(resultados_artigos_container);
+		
+		artigosResultadosTable = new JTable();
+		
+		ArtigosTab artsTab = new ArtigosTab(frame, monografiasResultadosTable);
+		
+		resultados_artigos_container.setViewportView(monografiasResultadosTable);
+		
+		Box verticalBox = Box.createVerticalBox();
+		artigosTab.setLeftComponent(verticalBox);
+		
+		JButton btnListarArtigos = new JButton("Listar Artigos");
+		verticalBox.add(btnListarArtigos);
+		
+		JButton btnInserirArtigo = new JButton("Inserir Monografia");
+		verticalBox.add(btnInserirArtigo);		
+		
+		artsTab.configBtnListarArtigos(btnListarArtigos);
+		artsTab.configBtnInserirArtigo(btnInserirArtigo);
 	}
 
 	private void configMonografiasTab(JSplitPane monografiasTab) {
 		JScrollPane resultados_monografia_container = new JScrollPane();
 		monografiasTab.setRightComponent(resultados_monografia_container);
 		
-		JTable resultadosTable;
-		resultadosTable = MonografiasTab.configResultadosTable();
-		resultados_monografia_container.setViewportView(resultadosTable);
+		monografiasResultadosTable = new JTable();
+		
+		MonografiasTab monsTab = new MonografiasTab(frame, monografiasResultadosTable);
+		
+		resultados_monografia_container.setViewportView(monografiasResultadosTable);
 		
 		Box verticalBox = Box.createVerticalBox();
 		monografiasTab.setLeftComponent(verticalBox);
@@ -102,9 +135,9 @@ public class GUIModel {
 		JButton btnInserirMonografia = new JButton("Inserir Monografia");
 		verticalBox.add(btnInserirMonografia);
 		
-		MonografiasTab monsTab = new MonografiasTab(frame);
 		
-		monsTab.configBtnListarMonografias(btnListarMonografias, resultadosTable);
+		
+		monsTab.configBtnListarMonografias(btnListarMonografias);
 		monsTab.configBtnInserirMonografia(btnInserirMonografia);
 		
 	}
@@ -125,6 +158,7 @@ public class GUIModel {
 		resultados_publicacoes_container.setViewportView(publicacaoResultadosTable);
 		
 		Box verticalBox = Box.createVerticalBox();
+		verticalBox.setBackground(Color.DARK_GRAY);
 		publicacoesTab.setLeftComponent(verticalBox);
 		
 		JButton btnListarPublicacoes = new JButton("Listar Publica\u00E7\u00F5es");

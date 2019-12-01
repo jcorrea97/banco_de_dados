@@ -2,8 +2,10 @@ package view;
 
 import java.util.List;
 
+import dao.ArtigosDAO;
 import dao.MonografiasDAO;
 import dao.PublicacoesDAO;
+import model.Artigo;
 import model.Autor;
 import model.Monografia;
 import model.Publicacao;
@@ -12,6 +14,7 @@ public class API {
 	
 	static PublicacoesDAO pubs;
 	static MonografiasDAO mons;
+	static ArtigosDAO arts;
 
 	public static List<Publicacao> listarPublicacoes() {
 		pubs = new PublicacoesDAO();
@@ -48,6 +51,11 @@ public class API {
 	public static Autor adicionaAutorNovoAPublicacao (Autor autor, int id_pub) {
 		pubs = new PublicacoesDAO();
 		return pubs.adicionaAutorNovoAPublicacao(autor, id_pub);
+	}
+
+	public static List<Artigo> listarArtigos() {
+		arts = new ArtigosDAO();
+		return arts.selecionaTudo();
 	}
 	
 }

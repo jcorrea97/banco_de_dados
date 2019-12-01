@@ -17,42 +17,45 @@ import view.API;
 import view.graphical_interface.popups.InsertMonografia;
 
 public class MonografiasTab extends GenericTab {
+	
+	private JTable monTable;
 
-	public MonografiasTab(JFrame frame) {
+	public MonografiasTab(JFrame frame, JTable monTable) {
 		super(frame);
+		this.monTable = monTable;
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static JTable configResultadosTable() {
+	public JTable configResultadosTable() {
 		
-		JTable table = new JTable(
-			new DefaultTableModel(
-			new Object[]{
-					"id_monografia", 
-					"titulo_publicacao",
-					"numero_monog", 
-					"tema_publicacao",
-					"nome_instituicao",
-					"local_publicacao"
-					},0
-			)
-		);
+		monTable.setModel(
+				new DefaultTableModel(
+				new Object[]{
+						"id_monografia", 
+						"titulo_publicacao",
+						"numero_monog", 
+						"tema_publicacao",
+						"nome_instituicao",
+						"local_publicacao"
+						},0
+				));
 		
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
-		table.setRowSorter(sorter);
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(monTable.getModel());
+		monTable.setRowSorter(sorter);
 
- 		return table;
+ 		return monTable;
 	}
 
 
 
-	public void configBtnListarMonografias(JButton btnListarMonografias, JTable resultadosTable) {		// TODO Auto-generated method stub
+	public void configBtnListarMonografias(JButton btnListarMonografias) {		// TODO Auto-generated method stub
 		btnListarMonografias.addActionListener(new ActionListener()
 		{
 			  public void actionPerformed(ActionEvent e)
 			  {
+			   configResultadosTable();
 			   List<Monografia> monografias = API.listarMonografias();
-			   DefaultTableModel model = (DefaultTableModel) resultadosTable.getModel();
+			   DefaultTableModel model = (DefaultTableModel) monTable.getModel();
 			   model.setRowCount(0);
 			   
 			   for(Monografia mon: monografias) {
