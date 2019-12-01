@@ -11,9 +11,15 @@ public class Livro {
 	private String tipo_livro;
 	private String titulo_original;
 	private Integer num_edicao;
-	private Calendar ano_pub;
+	private String ano_pub;
 	private Integer num_pg;
 	private Integer id_cap;
+	
+	
+	public Livro(String id_editora2, String titulo2, String tipo_livro2, String titulo_original2, String num_edicao2,
+			String ano_pub2, String num_pag) {
+		// TODO Auto-generated constructor stub
+	}
 	public Integer getId_livro() {
 		return id_livro;
 	}
@@ -56,10 +62,10 @@ public class Livro {
 	public void setNum_edicao(Integer num_edicao) {
 		this.num_edicao = num_edicao;
 	}
-	public Calendar getAno_pub() {
+	public String getAno_pub() {
 		return ano_pub;
 	}
-	public void setAno_pub(Calendar ano_pub) {
+	public void setAno_pub(String ano_pub) {
 		this.ano_pub = ano_pub;
 	}
 	public Integer getNum_pg() {
