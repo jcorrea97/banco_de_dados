@@ -8,7 +8,29 @@ public class Artigo extends Publicacao{
 	private Integer id_livro;
 	private Integer pg_inicial;
 	private Integer pg_final;
-
+	private Integer id_artigo_anais;
+	private String titulo_artigo;
+	private Integer id_artigo;
+	
+	
+	public Integer getId_artigo_anais() {
+		return id_artigo_anais;
+	}
+	public void setId_artigo_anais(Integer id_artigo_anais) {
+		this.id_artigo_anais = id_artigo_anais;
+	}
+	public String getTitulo_artigo() {
+		return titulo_artigo;
+	}
+	public void setTitulo_artigo(String titulo_artigo) {
+		this.titulo_artigo = titulo_artigo;
+	}
+	public Integer getId_artigo() {
+		return id_artigo;
+	}
+	public void setId_artigo(Integer id_artigo) {
+		this.id_artigo = id_artigo;
+	}
 	public Integer getId_periodico() {
 		return id_periodico;
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,39 @@ public class ArtigosDAO extends GenericDAO {
 			throw new RuntimeException(e);
 		}
 		
+	}
+	
+	
+public int adiciona(Artigo artigo) {		
+		
+		String sql = "insert into artigo (id_editora, id_livro, id_periodico, tipo_artigo, titulo_artigo, pg_inicial, pg_final, id_artigo_anais) values (?,?,?,?,?,?,?,?)";
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			stmt.setInt(1, artigo.getId_editora());
+			stmt.setInt(2, artigo.getId_livro());
+			stmt.setInt(3, artigo.getId_periodico());
+			stmt.setString(4, artigo.getTipo_artigo());
+			stmt.setString(5, artigo.getTitulo_artigo());
+			stmt.setInt(6, artigo.getPg_inicial());
+			stmt.setInt(7, artigo.getPg_final());
+			stmt.setInt(8, artigo.getId_artigo_anais());
+			stmt.execute();
+	
+			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		               return generatedKeys.getInt(1);
+		            }
+		            else {
+		                throw new SQLException("Criar artigo falhou, nenhum ID obtido");
+		            }
+		        }
+			
+			} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 	
 	private List<Artigo> executaSelecionaLista(PreparedStatement stmt) {

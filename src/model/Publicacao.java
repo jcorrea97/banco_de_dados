@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class Publicacao {
@@ -8,13 +8,29 @@ public class Publicacao {
 	private Integer id_pub;
 	private String tipo_publicacao;
 	private String local_publicacao;
-	private String titulo_publicacao;
-	private String tema_publicacao;
 	private Date data;
+	private Integer id_emprestimo_pub;
+	private String tema_publicacao;
+	private String titulo_publicacao;
 	private List<Autor> autores;
 	private int id_autor = -1; 
 	private String nome_autor = "";
 	
+	
+
+
+	public Integer getId_emprestimo_pub() {
+		return id_emprestimo_pub;
+	}
+
+	public void setId_emprestimo_pub(Integer id_emprestimo_pub) {
+		this.id_emprestimo_pub = id_emprestimo_pub;
+	}
+
+	public void setLocal_publicacao(String local_publicacao) {
+		this.local_publicacao = local_publicacao;
+	}
+
 	public List<Autor> getAutores() {
 		return autores;
 	}
@@ -24,7 +40,7 @@ public class Publicacao {
 	}
 
 	/**
-	 * Cria um novo objeto do tipo publicação
+	 * Cria um novo objeto do tipo publicaï¿½ï¿½o
 	 * @param tipo_publicacao_
 	 * @param local_publicacao_
 	 */

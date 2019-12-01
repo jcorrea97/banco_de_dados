@@ -7,8 +7,11 @@ public class Anais_conferencia {
 	private Integer id_editora;
 	private String volume;
 	private Integer numero;
-	private Calendar data;
+	private String data;
 	
+	public Anais_conferencia(String id_editora2, String volume, String numero, String data) {
+		// TODO Auto-generated constructor stub
+	}
 	public Integer getId_anal_conf() {
 		return id_anal_conf;
 	}
@@ -33,10 +36,10 @@ public class Anais_conferencia {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public Calendar getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Calendar data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	
