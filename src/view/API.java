@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.MonografiasDAO;
 import dao.PublicacoesDAO;
+import model.Autor;
 import model.Monografia;
 import model.Publicacao;
 
@@ -42,6 +43,11 @@ public class API {
 	public static List<Publicacao> listarPublicacoesAutores() {
 		pubs = new PublicacoesDAO();
 		return pubs.selecionaTudoComAutores();
+	}
+	
+	public static Autor adicionaAutorNovoAPublicacao (Autor autor, int id_pub) {
+		pubs = new PublicacoesDAO();
+		return pubs.adicionaAutorNovoAPublicacao(autor, id_pub);
 	}
 	
 }

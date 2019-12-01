@@ -22,49 +22,61 @@ import view.graphical_interface.popups.InsertMonografia;
 
 public class PublicacoesTab extends GenericTab{
 	
-	public PublicacoesTab(JFrame frame) {
+	JTable pubTable;
+	
+	public PublicacoesTab(JFrame frame, JTable pubTable) {
 		super(frame);
+		this.pubTable = pubTable;
 	}
 	
-	public static JTable configResultadosTable() {
+	public JTable configResultadosTable() {
 			
-		JTable table = new JTable(
-			new DefaultTableModel(
+//		pubTable = new JTable(
+//			new DefaultTableModel(
+//			new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao"}, 0
+//			)
+//		);
+		
+		pubTable.setModel(new DefaultTableModel(
 			new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao"}, 0
-			)
-		);
+		));
 		
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
-		table.setRowSorter(sorter);
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(pubTable.getModel());
+		pubTable.setRowSorter(sorter);
 
- 		return table;
+ 		return pubTable;
 	}
 	
 	
 	
-	public static JTable configResultadosTable(Object[] rows) {
+	public JTable configResultadosTable(Object[] rows) {
 		
-		JTable table = new JTable(
-			new DefaultTableModel(
+//		pubTable = new JTable(
+//			new DefaultTableModel(
+//			rows, 0
+//			)
+//		);
+		
+		pubTable.setModel(new DefaultTableModel(
 			rows, 0
-			)
-		);
+			));
 		
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
-		table.setRowSorter(sorter);
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(pubTable.getModel());
+		pubTable.setRowSorter(sorter);
 
- 		return table;
+ 		return pubTable;
 	}
 	
 	
 
-	public void configBtnListarPublicacoes(JButton btnListarPublicacoes, JTable resultados_table) {
+	public void configBtnListarPublicacoes(JButton btnListarPublicacoes) {
 		btnListarPublicacoes.addActionListener(new ActionListener()
 		{
 			  public void actionPerformed(ActionEvent e)
 			  {
+			   configResultadosTable();
 			   List<Publicacao> publicacoes = API.listarPublicacoes();
-			   DefaultTableModel model = (DefaultTableModel) resultados_table.getModel();
+			   DefaultTableModel model = (DefaultTableModel) pubTable.getModel();
 			   model.setRowCount(0);
 			   
 			   for(Publicacao pub : publicacoes) {
@@ -85,14 +97,14 @@ public class PublicacoesTab extends GenericTab{
 		);
 	}
 
-	public void configBtnListarPublicacoesAutor(JButton btnListarPublicacoesAutores, JTable resultados_table) {
+	public void configBtnListarPublicacoesAutor(JButton btnListarPublicacoesAutores) {
 		btnListarPublicacoesAutores.addActionListener(new ActionListener()
 		{
 			  public void actionPerformed(ActionEvent e)
 			  {
-				configResultadosTable(new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao", "nome_autor", "id_autor"});
+			   configResultadosTable(new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao", "nome_autor", "id_autor"});
 			   List<Publicacao> publicacoes = API.listarPublicacoesAutores();
-			   DefaultTableModel model = (DefaultTableModel) resultados_table.getModel();
+			   DefaultTableModel model = (DefaultTableModel) pubTable.getModel();
 			   model.setRowCount(0);
 			   
 			   for(Publicacao pub : publicacoes) {

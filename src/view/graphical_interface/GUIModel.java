@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 
+import model.Autor;
+import view.API;
 import view.graphical_interface.tabs.MonografiasTab;
 import view.graphical_interface.tabs.PublicacoesTab;
 
@@ -28,11 +30,13 @@ import javax.swing.JTable;
 public class GUIModel {
 
 	private JFrame frame;
+	JTable publicacaoResultadosTable;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -114,9 +118,11 @@ public class GUIModel {
 		JScrollPane resultados_publicacoes_container = new JScrollPane();
 		publicacoesTab.setRightComponent(resultados_publicacoes_container);
 		
-		JTable resultadosTable;
-		resultadosTable = PublicacoesTab.configResultadosTable();
-		resultados_publicacoes_container.setViewportView(resultadosTable);
+		publicacaoResultadosTable = new JTable();	
+		
+		PublicacoesTab pubsTabConfigurator = new PublicacoesTab(frame, publicacaoResultadosTable);
+		
+		resultados_publicacoes_container.setViewportView(publicacaoResultadosTable);
 		
 		Box verticalBox = Box.createVerticalBox();
 		publicacoesTab.setLeftComponent(verticalBox);
@@ -130,15 +136,15 @@ public class GUIModel {
 		JButton btnInserirPublicacao = new JButton("Inserir Publica\u00E7\u00E3o");
 		verticalBox.add(btnInserirPublicacao);
 		
-		PublicacoesTab pubsTab = new PublicacoesTab(frame);
 		
-		pubsTab.configBtnListarPublicacoes(btnListarPublicacoes, resultadosTable);
-		pubsTab.configBtnListarPublicacoesAutor(btnListarPublicacoesAutores, resultadosTable);
-		pubsTab.configBtnInserirPublicacao(btnInserirPublicacao);
+		pubsTabConfigurator.configBtnListarPublicacoes(btnListarPublicacoes);
+		pubsTabConfigurator.configBtnListarPublicacoesAutor(btnListarPublicacoesAutores);
+		pubsTabConfigurator.configBtnInserirPublicacao(btnInserirPublicacao);
 
 	
 		
 	}
+
 
 
 
