@@ -30,10 +30,13 @@ public class ArtigosTab extends GenericTab {
 		artigosTable.setModel(
 				new DefaultTableModel(
 				new Object[]{
-						"id_artigo", 
-						"titulo_artigo",
-						"tema_artigo",
-						"local_publicacao"
+						"id", 
+						"titulo do artigo",
+						"tema do artigo",
+						"local da publicacao",
+						"tipo do artigo",
+						"pagina inicial",
+						"pagina final"
 						},0
 				));
 		
@@ -57,10 +60,17 @@ public class ArtigosTab extends GenericTab {
 			   for(Artigo art: artigos) {
 				 
 				   model.addRow(new Object[]{
+						   
+						   // Metodos publicacao
 						   art.getId_pub(), 
 						   art.getTitulo_publicacao(),
 						   art.getTema_publicacao(),
 						   art.getLocal_publicacao(),
+						   
+						   // Metodos artigos
+						   art.getTipo_artigo(),
+						   art.getPg_inicial(),
+						   art.getPg_final()
 						   }
 				   );
 				   

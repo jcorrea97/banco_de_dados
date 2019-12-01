@@ -94,24 +94,29 @@ public class GUIModel {
 	}
 
 	private void configArtigosTab(JSplitPane artigosTab) {
+		
 		JScrollPane resultados_artigos_container = new JScrollPane();
 		artigosTab.setRightComponent(resultados_artigos_container);
 		
-		artigosResultadosTable = new JTable();
+		// Instanciando a table de resultados dos artigos e passando para o configurador
+		artigosResultadosTable = new JTable();		
+		ArtigosTab artsTab = new ArtigosTab(frame, artigosResultadosTable);
 		
-		ArtigosTab artsTab = new ArtigosTab(frame, monografiasResultadosTable);
 		
-		resultados_artigos_container.setViewportView(monografiasResultadosTable);
+		resultados_artigos_container.setViewportView(artigosResultadosTable);
 		
+		//Caixa dos botoes
 		Box verticalBox = Box.createVerticalBox();
 		artigosTab.setLeftComponent(verticalBox);
 		
+		//botoes
 		JButton btnListarArtigos = new JButton("Listar Artigos");
 		verticalBox.add(btnListarArtigos);
 		
 		JButton btnInserirArtigo = new JButton("Inserir Monografia");
 		verticalBox.add(btnInserirArtigo);		
 		
+		//configuracao dos botoes
 		artsTab.configBtnListarArtigos(btnListarArtigos);
 		artsTab.configBtnInserirArtigo(btnInserirArtigo);
 	}

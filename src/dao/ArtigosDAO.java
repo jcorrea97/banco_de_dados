@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Artigo;
-import model.Monografia;
 
 public class ArtigosDAO extends GenericDAO {
 
@@ -53,7 +52,7 @@ public class ArtigosDAO extends GenericDAO {
 						
 						//Atributos Artigo
 						art.setTipo_artigo(rs.getString("tipo_artigo"));
-						art.setPg_inicial(rs.getInt("pg_iniciall"));
+						art.setPg_inicial(rs.getInt("pg_inicial"));
 						art.setPg_final(rs.getInt("pg_final"));
 						
 						listaArtigos.add(art);

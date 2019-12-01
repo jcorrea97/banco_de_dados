@@ -31,12 +31,6 @@ public class PublicacoesTab extends GenericTab{
 	
 	public JTable configResultadosTable() {
 			
-//		pubTable = new JTable(
-//			new DefaultTableModel(
-//			new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao"}, 0
-//			)
-//		);
-		
 		pubTable.setModel(new DefaultTableModel(
 			new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao"}, 0
 		));
@@ -50,12 +44,6 @@ public class PublicacoesTab extends GenericTab{
 	
 	
 	public JTable configResultadosTable(Object[] rows) {
-		
-//		pubTable = new JTable(
-//			new DefaultTableModel(
-//			rows, 0
-//			)
-//		);
 		
 		pubTable.setModel(new DefaultTableModel(
 			rows, 0
