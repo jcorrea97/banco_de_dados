@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Autor;
-import model.Publicacao;
 
 public class PublicacoesAutoresDAO extends GenericDAO {
 
@@ -37,7 +36,7 @@ public class PublicacoesAutoresDAO extends GenericDAO {
 		               return;
 		            }
 		            else {
-		                throw new SQLException("Criar ligação falhou, nenhum ID obtido");
+		                throw new SQLException("Criar ligaï¿½ï¿½o falhou, nenhum ID obtido");
 		            }
 		        }
 			

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Autor;
-import model.Capitulo;
 
 public class AutoresDAO extends GenericDAO{
 	

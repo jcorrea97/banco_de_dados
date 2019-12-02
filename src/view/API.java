@@ -1,10 +1,14 @@
 package view;
 
+import java.sql.Date;
 import java.util.List;
 
+import dao.AnaisConferenciaDAO;
 import dao.ArtigosDAO;
 import dao.MonografiasDAO;
 import dao.PublicacoesDAO;
+
+import model.Anais_conferencia;
 import model.Artigo;
 import model.Autor;
 import model.Monografia;
@@ -12,18 +16,19 @@ import model.Publicacao;
 
 public class API {
 	
-	static PublicacoesDAO pubs;
-	static MonografiasDAO mons;
+	static PublicacoesDAO pubsDAO;
+	static MonografiasDAO monsDAO;
 	static ArtigosDAO artsDAO;
+	static AnaisConferenciaDAO anaisDAO;
 
 	public static List<Publicacao> listarPublicacoes() {
-		pubs = new PublicacoesDAO();
-		return pubs.selecionaTudo();
+		pubsDAO = new PublicacoesDAO();
+		return pubsDAO.selecionaTudo();
 	}
 
 	public static List<Monografia> listarMonografias() {
-		mons = new MonografiasDAO();
-		return mons.selecionaTudo();
+		monsDAO = new MonografiasDAO();
+		return monsDAO.selecionaTudo();
 	}
 	
 	public static int adicionarMonografia(
@@ -39,18 +44,18 @@ public class API {
 		mon.setLocal_publicacao(local_publicacao);
 		mon.setNome_instituicao(nome_instituicao);
 		mon.setTema_publicacao(tema_monografia);
-		mons = new MonografiasDAO();
-		return mons.adiciona(mon);
+		monsDAO = new MonografiasDAO();
+		return monsDAO.adiciona(mon);
 	}
 	
 	public static List<Publicacao> listarPublicacoesAutores() {
-		pubs = new PublicacoesDAO();
-		return pubs.selecionaTudoComAutores();
+		pubsDAO = new PublicacoesDAO();
+		return pubsDAO.selecionaTudoComAutores();
 	}
 	
 	public static Autor adicionaAutorNovoAPublicacao (Autor autor, int id_pub) {
-		pubs = new PublicacoesDAO();
-		return pubs.adicionaAutorNovoAPublicacao(autor, id_pub);
+		pubsDAO = new PublicacoesDAO();
+		return pubsDAO.adicionaAutorNovoAPublicacao(autor, id_pub);
 	}
 
 	public static List<Artigo> listarArtigos() {
@@ -76,6 +81,38 @@ public class API {
 		art.setPg_final(pg_final);
 		
 		return artsDAO.adiciona(art);
+	}
+
+	public static List<Anais_conferencia> listarAnaisDeConferencia() {
+		anaisDAO = new AnaisConferenciaDAO();
+		return anaisDAO.selecionaTudo();
+	}
+
+	public static int adicionarAnal(
+			// Atributos publicacao
+			String titulo, 
+			String tema_publicacao, 
+			String local_publicacao, 
+			
+			// Atributos Anal
+			int id_editora, 
+			String volume, 
+			int numero,
+			Date data) {
+		
+		anaisDAO = new AnaisConferenciaDAO();
+		Anais_conferencia anal = new Anais_conferencia(
+				id_editora,
+				volume,
+				numero,
+				data
+				);	
+		
+		anal.setTitulo_publicacao(titulo);
+		anal.setTema_publicacao(tema_publicacao);
+		anal.setLocal_publicacao(local_publicacao);
+			
+		return anaisDAO.adiciona(anal);
 	}
 	
 }

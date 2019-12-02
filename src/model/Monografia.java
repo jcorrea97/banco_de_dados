@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Calendar;
-
 public class Monografia extends Publicacao{
 	private Integer id_monografia;
 	private Integer numero_monog;

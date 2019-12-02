@@ -4,25 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
 
-import model.Autor;
-import view.API;
+import view.graphical_interface.tabs.AnaisTab;
 import view.graphical_interface.tabs.ArtigosTab;
 import view.graphical_interface.tabs.MonografiasTab;
 import view.graphical_interface.tabs.PublicacoesTab;
 
 import javax.swing.JButton;
-import javax.swing.JProgressBar;
-import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.Box;
-import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
@@ -35,6 +28,7 @@ public class GUIModel {
 	JTable publicacaoResultadosTable;
 	JTable monografiasResultadosTable;
 	JTable artigosResultadosTable;
+	JTable anaisResultadosTable;
 
 	/**
 	 * Launch the application.
@@ -75,39 +69,46 @@ public class GUIModel {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane);
 		
+		// Aba das publicacoes
 		JSplitPane publicacoesTab = new JSplitPane();
 		tabbedPane.addTab("Publica\u00E7\u00F5es", null, publicacoesTab, null);
 		
+		// Aba das monografias
 		JSplitPane monografiasTab = new JSplitPane();
 		tabbedPane.addTab("Monografias", null, monografiasTab, null);
 		
+		// Aba dos artigos
 		JSplitPane artigosTab = new JSplitPane();
 		tabbedPane.addTab("Artigos", null, artigosTab, null);
+		
+		//Aba dos anais
+		JSplitPane anaisTab = new JSplitPane();
+		tabbedPane.addTab("Anais de conferencia", null, anaisTab, null);
 		
 		
 		
 		configPublicacoesTab(publicacoesTab);
 		configMonografiasTab(monografiasTab);
 		configArtigosTab(artigosTab);
-	
+		configAnaisTab(anaisTab);
 		
 	}
 
-	private void configArtigosTab(JSplitPane artigosTab) {
-		
-		JScrollPane resultados_artigos_container = new JScrollPane();
-		artigosTab.setRightComponent(resultados_artigos_container);
+	private void configArtigosTab(JSplitPane anaisTab) {
+
+		JScrollPane resultados_anais_container = new JScrollPane();
+		anaisTab.setRightComponent(resultados_anais_container);
 		
 		// Instanciando a table de resultados dos artigos e passando para o configurador
 		artigosResultadosTable = new JTable();		
 		ArtigosTab artsTab = new ArtigosTab(frame, artigosResultadosTable);
 		
 		
-		resultados_artigos_container.setViewportView(artigosResultadosTable);
+		resultados_anais_container.setViewportView(artigosResultadosTable);
 		
 		//Caixa dos botoes
 		Box verticalBox = Box.createVerticalBox();
-		artigosTab.setLeftComponent(verticalBox);
+		anaisTab.setLeftComponent(verticalBox);
 		
 		//botoes
 		JButton btnListarArtigos = new JButton("Listar Artigos");
@@ -119,6 +120,34 @@ public class GUIModel {
 		//configuracao dos botoes
 		artsTab.configBtnListarArtigos(btnListarArtigos);
 		artsTab.configBtnInserirArtigo(btnInserirArtigo);
+	}
+
+	private void configAnaisTab(JSplitPane artigosTab) {
+		
+		JScrollPane resultados_artigos_container = new JScrollPane();
+		artigosTab.setRightComponent(resultados_artigos_container);
+		
+		// Instanciando a table de resultados dos anais e passando para o configurador
+		anaisResultadosTable = new JTable();		
+		AnaisTab anaisTab = new AnaisTab(frame, anaisResultadosTable);
+		
+		
+		resultados_artigos_container.setViewportView(anaisResultadosTable);
+		
+		//Caixa dos botoes
+		Box verticalBox = Box.createVerticalBox();
+		artigosTab.setLeftComponent(verticalBox);
+		
+		//botoes
+		JButton btnListarAnais = new JButton("Listar Anais de conferencia");
+		verticalBox.add(btnListarAnais);
+		
+		JButton btnInserirAnal = new JButton("Inserir Anais de conferencia");
+		verticalBox.add(btnInserirAnal);		
+		
+		//configuracao dos botoes
+		anaisTab.configBtnListaAnais(btnListarAnais);
+		anaisTab.configBtnInserirAnal(btnInserirAnal);
 	}
 
 	private void configMonografiasTab(JSplitPane monografiasTab) {

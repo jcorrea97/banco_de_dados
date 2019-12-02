@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Artigo;
-import model.Publicacao;
 
 public class ArtigosDAO extends GenericDAO {
 

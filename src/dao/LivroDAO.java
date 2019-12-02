@@ -4,12 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import model.Autor;
 import model.Livro;
-import model.Publicacao;
 
 
 public class LivroDAO extends GenericDAO{
@@ -23,7 +18,7 @@ public class LivroDAO extends GenericDAO{
 
 		Livro liv = new Livro(id_editora, titulo, tipo_livro, titulo_original, num_edicao, ano_pub, num_pag);
 
-		String sql = "insert into livros (id_editora, titulo, tipo_livro, titulo_original, num_edicao, ano_pub, num_pag) values (?,?, ?,?,?,?,?)";
+		String sql = "insert into livros (id_editora, titulo, tipo_livro, titulo_original, num_edicao, ano_pub, num_pag) values (?,?,?,?,?,?,?)";
 		try {
 
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

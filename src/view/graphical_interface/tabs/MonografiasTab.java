@@ -12,7 +12,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.Monografia;
-import model.Publicacao;
 import view.API;
 import view.graphical_interface.popups.InsertMonografia;
 
