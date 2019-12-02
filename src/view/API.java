@@ -14,7 +14,7 @@ public class API {
 	
 	static PublicacoesDAO pubs;
 	static MonografiasDAO mons;
-	static ArtigosDAO arts;
+	static ArtigosDAO artsDAO;
 
 	public static List<Publicacao> listarPublicacoes() {
 		pubs = new PublicacoesDAO();
@@ -36,13 +36,13 @@ public class API {
 		Monografia mon = new Monografia();
 		mon.setNumero_monog(num_monografia);
 		mon.setTitulo_publicacao(titulo_monografia);
-		mon.setLocal(local_publicacao);
+		mon.setLocal_publicacao(local_publicacao);
 		mon.setNome_instituicao(nome_instituicao);
 		mon.setTema_publicacao(tema_monografia);
 		mons = new MonografiasDAO();
 		return mons.adiciona(mon);
 	}
-
+	
 	public static List<Publicacao> listarPublicacoesAutores() {
 		pubs = new PublicacoesDAO();
 		return pubs.selecionaTudoComAutores();
@@ -54,8 +54,28 @@ public class API {
 	}
 
 	public static List<Artigo> listarArtigos() {
-		arts = new ArtigosDAO();
-		return arts.selecionaTudo();
+		artsDAO = new ArtigosDAO();
+		return artsDAO.selecionaTudo();
+	}
+
+	public static int adicionarArtigo(
+			String titulo, 
+			String tema_publicacao, 
+			String local_publicacao, 
+			String tipo_artigo, 
+			int pg_inicial,
+			int pg_final) 
+	{
+		artsDAO = new ArtigosDAO();
+		Artigo art = new Artigo();
+		art.setTitulo_publicacao(titulo);
+		art.setTema_publicacao(tema_publicacao);
+		art.setLocal_publicacao(local_publicacao);
+		art.setTipo_artigo(tipo_artigo);
+		art.setPg_inicial(pg_inicial);
+		art.setPg_final(pg_final);
+		
+		return artsDAO.adiciona(art);
 	}
 	
 }

@@ -31,12 +31,12 @@ public class MonografiasTab extends GenericTab {
 		monTable.setModel(
 				new DefaultTableModel(
 				new Object[]{
-						"id_monografia", 
-						"titulo_publicacao",
-						"numero_monog", 
-						"tema_publicacao",
-						"nome_instituicao",
-						"local_publicacao"
+						"id", 
+						"titulo",
+						"numero da monografia", 
+						"tema",
+						"nome da instituicao",
+						"local da publicacao"
 						},0
 				));
 		

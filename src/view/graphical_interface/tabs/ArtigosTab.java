@@ -12,8 +12,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.Artigo;
-import model.Monografia;
 import view.API;
+import view.graphical_interface.popups.InsertArtigo;
 
 public class ArtigosTab extends GenericTab {
 	
@@ -31,10 +31,10 @@ public class ArtigosTab extends GenericTab {
 				new DefaultTableModel(
 				new Object[]{
 						"id", 
-						"titulo do artigo",
-						"tema do artigo",
+						"titulo",
+						"tema",
 						"local da publicacao",
-						"tipo do artigo",
+						"tipo",
 						"pagina inicial",
 						"pagina final"
 						},0
@@ -82,7 +82,14 @@ public class ArtigosTab extends GenericTab {
 	}
 
 	public void configBtnInserirArtigo(JButton btnInserirArtigo) {
-		// TODO Auto-generated method stub
+		btnInserirArtigo.addActionListener(new ActionListener()
+		{
+			  public void actionPerformed(ActionEvent e)
+			  {
+				  InsertArtigo.executar();			   
+			  }
+			}
+		);
 		
 	}
 	

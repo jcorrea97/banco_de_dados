@@ -32,7 +32,7 @@ public class PublicacoesTab extends GenericTab{
 	public JTable configResultadosTable() {
 			
 		pubTable.setModel(new DefaultTableModel(
-			new Object[]{"id_pub", "local_pub", "tipo_publicacao", "titulo_publicacao", "tema_publicacao"}, 0
+			new Object[]{"id", "local da publicacao", "tipo da publicacao", "titulo", "tema"}, 0
 		));
 		
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(pubTable.getModel());

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Artigo;
+import model.Publicacao;
 
 public class ArtigosDAO extends GenericDAO {
 
@@ -37,36 +38,62 @@ public class ArtigosDAO extends GenericDAO {
 	}
 	
 	
-public int adiciona(Artigo artigo) {		
-		
-		String sql = "insert into artigo (id_editora, id_livro, id_periodico, tipo_artigo, titulo_artigo, pg_inicial, pg_final, id_artigo_anais) values (?,?,?,?,?,?,?,?)";
-		try {
-			
-			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			
-			stmt.setInt(1, artigo.getId_editora());
-			stmt.setInt(2, artigo.getId_livro());
-			stmt.setInt(3, artigo.getId_periodico());
-			stmt.setString(4, artigo.getTipo_artigo());
-			stmt.setString(5, artigo.getTitulo_artigo());
-			stmt.setInt(6, artigo.getPg_inicial());
-			stmt.setInt(7, artigo.getPg_final());
-			stmt.setInt(8, artigo.getId_artigo_anais());
-			stmt.execute();
 	
-			 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-		            if (generatedKeys.next()) {
-		               return generatedKeys.getInt(1);
-		            }
-		            else {
-		                throw new SQLException("Criar artigo falhou, nenhum ID obtido");
-		            }
-		        }
+public int adiciona(Artigo artigo) {
+	
+		try {
+			con.setAutoCommit(false);
+			PublicacoesDAO pubs = new PublicacoesDAO(con);
+			int id_artigo = pubs.adiciona(artigo);
 			
-			} catch (SQLException e) {
+			
+			String sql = "insert into artigos (id_editora, id_livro, id_periodico, tipo_artigo, pg_inicial, pg_final, id_artigo_anais, id_artigo) values (?,?,?,?,?,?,?,?)";
+			try {
+				
+				PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				
+				if (artigo.getId_editora() != null)
+				stmt.setInt(1, artigo.getId_editora());
+				else stmt.setNull(1, java.sql.Types.INTEGER);
+
+				if (artigo.getId_livro() != null)
+				stmt.setInt(2, artigo.getId_livro());
+				else stmt.setNull(2, java.sql.Types.INTEGER);
+
+				if (artigo.getId_periodico() != null)
+				stmt.setInt(3, artigo.getId_periodico());
+				else stmt.setNull(3, java.sql.Types.INTEGER);
+
+				if (artigo.getId_artigo_anais() != null)				
+				stmt.setInt(7, artigo.getId_artigo_anais());
+				else stmt.setNull(7, java.sql.Types.INTEGER);
+				
+				
+				stmt.setString(4, artigo.getTipo_artigo());
+				stmt.setInt(5, artigo.getPg_inicial());
+				stmt.setInt(6, artigo.getPg_final());
+				stmt.setInt(8, id_artigo);
+				stmt.execute();
+				con.commit();
+				 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+			            if (generatedKeys.next()) {
+			               return generatedKeys.getInt(1);
+			            }
+			            else {
+			                throw new SQLException("Criar artigo falhou, nenhum ID obtido");
+			            }
+			        }
+				
+				} catch (SQLException e) {
+				con.setAutoCommit(true);
+				throw new RuntimeException(e);
+			}
+
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
+		
+		
 	}
 	
 	private List<Artigo> executaSelecionaLista(PreparedStatement stmt) {
@@ -78,9 +105,9 @@ public int adiciona(Artigo artigo) {
 					do {
 						Artigo art = new Artigo();
 						//Atributos Publicacao
-						art.setId_pub(rs.getInt("id_publicacao"));
+						art.setId_pub(rs.getInt("id_pub"));
 						art.setTitulo_publicacao(rs.getString("titulo_publicacao"));
-						art.setLocal(rs.getString("local_publicacao"));
+						art.setLocal_publicacao(rs.getString("local_publicacao"));
 						art.setTipo_publicacao(rs.getString("tipo_publicacao"));
 						art.setTema_publicacao(rs.getString("tema_publicacao"));
 						

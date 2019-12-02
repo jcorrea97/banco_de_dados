@@ -2,16 +2,19 @@ package model;
 
 public class Artigo extends Publicacao{
 
-	private Integer id_periodico;
-	private Integer id_editora;
+	private Integer id_periodico = null;
+	private Integer id_editora = null;
 	private String tipo_artigo;
-	private Integer id_livro;
+	private Integer id_livro = null;
 	private Integer pg_inicial;
 	private Integer pg_final;
-	private Integer id_artigo_anais;
+	private Integer id_artigo_anais = null;
 	private String titulo_artigo;
 	private Integer id_artigo;
 	
+	public Artigo () {
+		setTipo_publicacao("artigo");
+	}	
 	
 	public Integer getId_artigo_anais() {
 		return id_artigo_anais;

@@ -65,7 +65,7 @@ public class MonografiasDAO extends GenericDAO{
 		            	mon.setId(rs.getInt("id_monografia"));
 		            	mon.setTitulo_publicacao("titulo_publicacao");
 		            	mon.setData(rs.getDate("data")); //TODO Nao sei se funciona
-		            	mon.setLocal(rs.getString("local_publicacao"));
+		            	mon.setLocal_publicacao(rs.getString("local_publicacao"));
 		            	mon.setNome_instituicao(rs.getString("nome_insituicao"));
 		            	mon.setNumero_monog(rs.getInt("numero_monog"));
 		            	mon.setTipo_publicacao(rs.getString("tipo_publicacao"));
@@ -143,7 +143,7 @@ public class MonografiasDAO extends GenericDAO{
 		            	mon.setId(rs.getInt("id_monografia"));
 		            	mon.setTitulo_publicacao(rs.getString("titulo_publicacao"));
 		            	mon.setData(rs.getDate("data")); //TODO Nao sei se funciona
-		            	mon.setLocal(rs.getString("local_publicacao"));
+		            	mon.setLocal_publicacao(rs.getString("local_publicacao"));
 		            	mon.setNome_instituicao(rs.getString("nome_instituicao"));
 		            	mon.setNumero_monog(rs.getInt("numero_monog"));
 		            	mon.setTipo_publicacao(rs.getString("tipo_publicacao"));

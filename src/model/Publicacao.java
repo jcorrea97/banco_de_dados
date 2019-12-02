@@ -51,7 +51,7 @@ public class Publicacao {
 			String tema_publicacao_){
 		setTitulo_publicacao(titulo_publicacao_);
 		setTema_publicacao(tema_publicacao_);
-		setLocal(local_publicacao_);
+		setLocal_publicacao(local_publicacao_);
 		setTipo_publicacao(tipo_publicacao_);
 	}
 	
@@ -73,9 +73,6 @@ public class Publicacao {
 	}
 	public String getLocal_publicacao() {
 		return local_publicacao;
-	}
-	public void setLocal(String local) {
-		this.local_publicacao = local;
 	}
 	
 	@Override

@@ -25,7 +25,7 @@ public class InsertMonografia {
         panel.add(field4);
         panel.add(new JLabel("Local de publicacao"));
         panel.add(field5);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Test",
+        int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar monografia",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             API.adicionarMonografia(

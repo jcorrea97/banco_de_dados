@@ -113,7 +113,7 @@ public class GUIModel {
 		JButton btnListarArtigos = new JButton("Listar Artigos");
 		verticalBox.add(btnListarArtigos);
 		
-		JButton btnInserirArtigo = new JButton("Inserir Monografia");
+		JButton btnInserirArtigo = new JButton("Inserir Artigo");
 		verticalBox.add(btnInserirArtigo);		
 		
 		//configuracao dos botoes
