@@ -29,11 +29,11 @@ public class InsertMonografia {
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             API.adicionarMonografia(
-            		Integer.parseInt(field4.getText()),
             		field1.getText(), 
-            		field5.getText(), 
+            		field2.getText(),
             		field3.getText(), 
-            		field2.getText());
+            		Integer.parseInt(field4.getText()),
+            		field5.getText());
         } else {
             System.out.println("Cancelled");
         }

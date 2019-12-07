@@ -1,24 +1,29 @@
 package dao;
 
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.util.List;
 
 import model.Anais_conferencia;
 import model.Artigo;
 import model.Autor;
 import model.Editora;
+import model.Emprestimo;
 import model.Monografia;
+import model.Pessoa;
 import model.Publicacao;
 
 public class API {
 	
 	static PublicacoesDAO pubsDAO;
+	static EmprestimosDAO empsDAO;
 	static MonografiasDAO monsDAO;
 	static ArtigosDAO artsDAO;
 	static AnaisConferenciaDAO anaisDAO;
 	static EditorasDAO editsDAO;
 	static AutoresDAO autsDAO;
 	static PublicacoesAutoresDAO pubsAutsDAO;
+	static PessoasDAO pessoasDAO;
 
 	public static List<Publicacao> listarPublicacoes() {
 		pubsDAO = new PublicacoesDAO();
@@ -31,11 +36,11 @@ public class API {
 	}
 	
 	public static int adicionarMonografia(
-			int num_monografia,
 			String titulo_monografia,
-			String local_publicacao,
 			String nome_instituicao,
-			String tema_monografia
+			String tema_monografia,
+			int num_monografia,
+			String local_publicacao
 			) {
 		Monografia mon = new Monografia();
 		mon.setNumero_monog(num_monografia);
@@ -138,6 +143,37 @@ public class API {
 	public static void linkAutorPublicacao(int id_pub, int id_autor) {
 		pubsAutsDAO = new PublicacoesAutoresDAO();
 		pubsAutsDAO.link(id_pub, id_autor);		
+	}
+
+	public static List<Emprestimo> listarEmprestimos() {
+		empsDAO = new EmprestimosDAO();
+		return empsDAO.selecionaTudo();
+	}
+
+	public static List<Pessoa> listarPessoas() {
+		pessoasDAO = new PessoasDAO();
+		return pessoasDAO.selecionaTudo();
+	}
+
+	public static void adicionarPessoa(String cpf_cnpj_pessoa, String nome_pessoa) {
+		pessoasDAO = new PessoasDAO();
+		pessoasDAO.adiciona(cpf_cnpj_pessoa, nome_pessoa);
+	}
+
+	public static int fazerEmprestimo(String cpf_cnpj_pessoa, int id_pub, Date data_emprestimo, Date data_devolucao) {
+		empsDAO = new EmprestimosDAO();
+		Emprestimo emp = new Emprestimo();
+		emp.setCpf_cnpj_pessoa(cpf_cnpj_pessoa);
+		emp.setId_pub(id_pub);
+		emp.setData_emprestimo(data_emprestimo);
+		emp.setData_devolucao(data_devolucao);
+		return empsDAO.adiciona(emp);
+		
+	}
+	
+	public static ResultSet listarPubsEmprestadas() {
+		pubsDAO = new PublicacoesDAO();
+		return pubsDAO.selecionaEmprestadas();
 	}
 	
 	

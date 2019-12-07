@@ -12,7 +12,9 @@ import view.graphical_interface.tabs.AnaisTab;
 import view.graphical_interface.tabs.ArtigosTab;
 import view.graphical_interface.tabs.AutoresTab;
 import view.graphical_interface.tabs.EditorasTab;
+import view.graphical_interface.tabs.EmprestimosTab;
 import view.graphical_interface.tabs.MonografiasTab;
+import view.graphical_interface.tabs.PessoasTab;
 import view.graphical_interface.tabs.PublicacoesTab;
 
 import javax.swing.JButton;
@@ -28,11 +30,13 @@ public class GUIModel {
 
 	private JFrame frame;
 	JTable publicacaoResultadosTable;
+	JTable emprestimosResultadosTable;
 	JTable monografiasResultadosTable;
 	JTable editorasResultadosTable;
 	JTable artigosResultadosTable;
 	JTable anaisResultadosTable;
-	private JTable autoresResultadosTable;
+	JTable autoresResultadosTable;
+	JTable pessoasResultadoTable;
 
 	/**
 	 * Launch the application.
@@ -77,6 +81,10 @@ public class GUIModel {
 		JSplitPane publicacoesTab = new JSplitPane();
 		tabbedPane.addTab("Publica\u00E7\u00F5es", null, publicacoesTab, null);
 		
+		// Aba dos emprestimos
+		JSplitPane emprestimosTab = new JSplitPane();
+		tabbedPane.addTab("Emprestimos", null, emprestimosTab, null);
+		
 		// Aba das monografias
 		JSplitPane monografiasTab = new JSplitPane();
 		tabbedPane.addTab("Monografias", null, monografiasTab, null);
@@ -96,15 +104,75 @@ public class GUIModel {
 		//Aba dos autores
 		JSplitPane autoresTab = new JSplitPane();
 		tabbedPane.addTab("Autores", null, autoresTab, null);
+
+		//Aba das pessoas
+		JSplitPane pessoasTab = new JSplitPane();
+		tabbedPane.addTab("Pessoas", null, pessoasTab, null);
 		
 		
 		configPublicacoesTab(publicacoesTab);
+		configEmprestimosTab(emprestimosTab);		
 		configMonografiasTab(monografiasTab);
 		configArtigosTab(artigosTab);
 		configAnaisTab(anaisTab);
 		configEditorasTab(editorasTab);
 		configAutoresTab(autoresTab);
+		configPessoasTab(pessoasTab);
 		
+	}
+
+	private void configPessoasTab(JSplitPane pessoasTab) {
+		JScrollPane resultados_pessoas_container = new JScrollPane();
+		pessoasTab.setRightComponent(resultados_pessoas_container);
+		
+		// Instanciando a table de resultados dos artigos e passando para o configurador
+		pessoasResultadoTable = new JTable();		
+		PessoasTab pesTab = new PessoasTab(frame, pessoasResultadoTable);
+		
+		
+		resultados_pessoas_container.setViewportView(pessoasResultadoTable);
+		
+		//Caixa dos botoes
+		Box verticalBox = Box.createVerticalBox();
+		pessoasTab.setLeftComponent(verticalBox);
+		
+		//botoes
+		JButton btnListarPessoas = new JButton("Listar Pessoas");
+		verticalBox.add(btnListarPessoas);
+		
+		JButton btnInserirPessoa = new JButton("Inserir Pessoa");
+		verticalBox.add(btnInserirPessoa);		
+		
+		//configuracao dos botoes
+		pesTab.configBtnListarPessoas(btnListarPessoas);
+		pesTab.configBtnInserirPessoa(btnInserirPessoa);
+	}
+
+	private void configEmprestimosTab(JSplitPane emprestimosTab) {
+		JScrollPane resultados_emprestimos_container = new JScrollPane();
+		emprestimosTab.setRightComponent(resultados_emprestimos_container);
+		
+		// Instanciando a table de resultados dos artigos e passando para o configurador
+		emprestimosResultadosTable = new JTable();		
+		EmprestimosTab empsTab = new EmprestimosTab(frame, emprestimosResultadosTable);
+		
+		
+		resultados_emprestimos_container.setViewportView(emprestimosResultadosTable);
+		
+		//Caixa dos botoes
+		Box verticalBox = Box.createVerticalBox();
+		emprestimosTab.setLeftComponent(verticalBox);
+		
+		//botoes
+		JButton btnListarEmprestimos = new JButton("Listar Emprestimos");
+		verticalBox.add(btnListarEmprestimos);
+		
+		JButton btnFazerEmprestimo = new JButton("Fazer um emprestimo");
+		verticalBox.add(btnFazerEmprestimo);		
+		
+		//configuracao dos botoes
+		empsTab.configBtnListarEmprestimos(btnListarEmprestimos);
+		empsTab.configBtnFazerEmprestimo(btnFazerEmprestimo);
 	}
 
 	private void configEditorasTab(JSplitPane editorasTab) {
@@ -241,12 +309,16 @@ public class GUIModel {
 		JButton btnListarPublicacoesAutores = new JButton("Listar Publica\u00E7\u00F5es com autores");
 		verticalBox.add(btnListarPublicacoesAutores);
 		
+		JButton btnListarPublicacoesEmprestadas = new JButton("Listar Publica\u00E7\u00F5es emprestadas");
+		verticalBox.add(btnListarPublicacoesEmprestadas);
+		
 		JButton btnInserirAutorAPublicacao = new JButton("Inserir autor a publicacao");
 		verticalBox.add(btnInserirAutorAPublicacao);
 		
 		
 		pubsTabConfigurator.configBtnListarPublicacoes(btnListarPublicacoes);
 		pubsTabConfigurator.configBtnListarPublicacoesAutor(btnListarPublicacoesAutores);
+		pubsTabConfigurator.configBtnListarPublicacoesEmprestadas(btnListarPublicacoesEmprestadas);
 		pubsTabConfigurator.configBtnInserirPublicacao(btnInserirAutorAPublicacao);
 
 	

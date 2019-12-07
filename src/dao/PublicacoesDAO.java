@@ -169,6 +169,22 @@ public class PublicacoesDAO extends GenericDAO{
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public ResultSet selecionaEmprestadas() {
+
+		String sql = "select p.*, e.id_emprestimo, e.cpf_cnpj_pessoa from publicacoes as p "
+				+ "inner join emprestimos e on (p.id_pub = e.id_pub)";
+
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.execute();
+			return stmt.getResultSet();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * Lista todas as publicacao presentes no Banco de dados, se nenhuma for encontrada retorna null
@@ -266,10 +282,9 @@ public class PublicacoesDAO extends GenericDAO{
 	
 	public List<Publicacao> selecionaTudoComAutores() {
 		
-		String sql = "select p.*, a.* from publicacoes p " + 
-				"inner join publicacoes_autores pa on " + 
-				"p.id_pub = (select p1.id_pub from publicacoes_autores as p1 where p.id_pub = p1.id_pub limit 1) " + 
-				"join autores a on (a.id_autor = pa.id_autor) ";
+		String sql  = "select p.*, a.* from publicacoes as p "
+					+ "inner join publicacoes_autores pa on (p.id_pub = pa.id_pub) "
+					+ "inner join autores a on (a.id_autor = pa.id_autor)";
 		
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -300,8 +315,9 @@ public class PublicacoesDAO extends GenericDAO{
 							pub.setNome_autor(nome_autor);
 							pub.setId_autor(id_autor);
 							
+							
 						} catch (Exception e) {
-							System.out.println("Publicacao sem autor");
+						
 						}
 						pub.setId_pub(rs.getInt("id_pub"));
 						listaPubs.add(pub);
