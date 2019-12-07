@@ -1,16 +1,12 @@
-package view;
+package dao;
 
 import java.sql.Date;
 import java.util.List;
 
-import dao.AnaisConferenciaDAO;
-import dao.ArtigosDAO;
-import dao.MonografiasDAO;
-import dao.PublicacoesDAO;
-
 import model.Anais_conferencia;
 import model.Artigo;
 import model.Autor;
+import model.Editora;
 import model.Monografia;
 import model.Publicacao;
 
@@ -20,6 +16,9 @@ public class API {
 	static MonografiasDAO monsDAO;
 	static ArtigosDAO artsDAO;
 	static AnaisConferenciaDAO anaisDAO;
+	static EditorasDAO editsDAO;
+	static AutoresDAO autsDAO;
+	static PublicacoesAutoresDAO pubsAutsDAO;
 
 	public static List<Publicacao> listarPublicacoes() {
 		pubsDAO = new PublicacoesDAO();
@@ -114,5 +113,33 @@ public class API {
 			
 		return anaisDAO.adiciona(anal);
 	}
+
+	public static List<Editora> listarEditoras() {
+		editsDAO = new EditorasDAO();
+		return editsDAO.selecionaTudo();
+	}
+	
+	public static int adicionarEditora(String editora) {
+		editsDAO = new EditorasDAO();
+		return editsDAO.adiciona(editora);
+	}
+
+	public static List<Autor> listarAutores() {
+		autsDAO = new AutoresDAO();
+		return autsDAO.selecionaTudo();
+	}
+
+	public static int adicionarAutor(String nome) {
+		autsDAO = new AutoresDAO();
+		Autor autor = new Autor(nome);
+		return autsDAO.adiciona(autor);
+	}
+
+	public static void linkAutorPublicacao(int id_pub, int id_autor) {
+		pubsAutsDAO = new PublicacoesAutoresDAO();
+		pubsAutsDAO.link(id_pub, id_autor);		
+	}
+	
+	
 	
 }

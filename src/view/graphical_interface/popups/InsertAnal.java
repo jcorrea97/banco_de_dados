@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
-import view.API;
+import dao.API;
 
 public class InsertAnal {
 

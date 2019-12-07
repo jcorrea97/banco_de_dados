@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import dao.API;
 import model.Anais_conferencia;
-import view.API;
 import view.graphical_interface.popups.InsertAnal;
 
 public class AnaisTab extends GenericTab {

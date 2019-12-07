@@ -267,7 +267,7 @@ public class PublicacoesDAO extends GenericDAO{
 	public List<Publicacao> selecionaTudoComAutores() {
 		
 		String sql = "select p.*, a.* from publicacoes p " + 
-				"left outer join publicacoes_autores pa on " + 
+				"inner join publicacoes_autores pa on " + 
 				"p.id_pub = (select p1.id_pub from publicacoes_autores as p1 where p.id_pub = p1.id_pub limit 1) " + 
 				"join autores a on (a.id_autor = pa.id_autor) ";
 		

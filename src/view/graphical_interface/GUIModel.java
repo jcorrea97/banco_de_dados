@@ -10,6 +10,8 @@ import javax.swing.JSplitPane;
 
 import view.graphical_interface.tabs.AnaisTab;
 import view.graphical_interface.tabs.ArtigosTab;
+import view.graphical_interface.tabs.AutoresTab;
+import view.graphical_interface.tabs.EditorasTab;
 import view.graphical_interface.tabs.MonografiasTab;
 import view.graphical_interface.tabs.PublicacoesTab;
 
@@ -27,8 +29,10 @@ public class GUIModel {
 	private JFrame frame;
 	JTable publicacaoResultadosTable;
 	JTable monografiasResultadosTable;
+	JTable editorasResultadosTable;
 	JTable artigosResultadosTable;
 	JTable anaisResultadosTable;
+	private JTable autoresResultadosTable;
 
 	/**
 	 * Launch the application.
@@ -84,14 +88,50 @@ public class GUIModel {
 		//Aba dos anais
 		JSplitPane anaisTab = new JSplitPane();
 		tabbedPane.addTab("Anais de conferencia", null, anaisTab, null);
+
+		//Aba das editoras
+		JSplitPane editorasTab = new JSplitPane();
+		tabbedPane.addTab("Editoras", null, editorasTab, null);
 		
+		//Aba dos autores
+		JSplitPane autoresTab = new JSplitPane();
+		tabbedPane.addTab("Autores", null, autoresTab, null);
 		
 		
 		configPublicacoesTab(publicacoesTab);
 		configMonografiasTab(monografiasTab);
 		configArtigosTab(artigosTab);
 		configAnaisTab(anaisTab);
+		configEditorasTab(editorasTab);
+		configAutoresTab(autoresTab);
 		
+	}
+
+	private void configEditorasTab(JSplitPane editorasTab) {
+		JScrollPane resultados_editoras_container = new JScrollPane();
+		editorasTab.setRightComponent(resultados_editoras_container);
+		
+		// Instanciando a table de resultados dos artigos e passando para o configurador
+		editorasResultadosTable = new JTable();		
+		EditorasTab editsTab = new EditorasTab(frame, editorasResultadosTable);
+		
+		
+		resultados_editoras_container.setViewportView(editorasResultadosTable);
+		
+		//Caixa dos botoes
+		Box verticalBox = Box.createVerticalBox();
+		editorasTab.setLeftComponent(verticalBox);
+		
+		//botoes
+		JButton btnListaEditorasr = new JButton("Listar Editoras");
+		verticalBox.add(btnListaEditorasr);
+		
+		JButton btnInserirEditora = new JButton("Inserir Editora");
+		verticalBox.add(btnInserirEditora);		
+		
+		//configuracao dos botoes
+		editsTab.configBtnListarEditoras(btnListaEditorasr);
+		editsTab.configBtnInserirEditora(btnInserirEditora);
 	}
 
 	private void configArtigosTab(JSplitPane anaisTab) {
@@ -201,19 +241,44 @@ public class GUIModel {
 		JButton btnListarPublicacoesAutores = new JButton("Listar Publica\u00E7\u00F5es com autores");
 		verticalBox.add(btnListarPublicacoesAutores);
 		
-		JButton btnInserirPublicacao = new JButton("Inserir Publica\u00E7\u00E3o");
-		verticalBox.add(btnInserirPublicacao);
+		JButton btnInserirAutorAPublicacao = new JButton("Inserir autor a publicacao");
+		verticalBox.add(btnInserirAutorAPublicacao);
 		
 		
 		pubsTabConfigurator.configBtnListarPublicacoes(btnListarPublicacoes);
 		pubsTabConfigurator.configBtnListarPublicacoesAutor(btnListarPublicacoesAutores);
-		pubsTabConfigurator.configBtnInserirPublicacao(btnInserirPublicacao);
+		pubsTabConfigurator.configBtnInserirPublicacao(btnInserirAutorAPublicacao);
 
 	
 		
 	}
 
-
+	private void configAutoresTab(JSplitPane autoresTab) {
+		JScrollPane resultados_autores_container = new JScrollPane();
+		autoresTab.setRightComponent(resultados_autores_container);
+		
+		// Instanciando a table de resultados dos artigos e passando para o configurador
+		autoresResultadosTable = new JTable();		
+		AutoresTab autsTab = new AutoresTab(frame, autoresResultadosTable);
+		
+		
+		resultados_autores_container.setViewportView(autoresResultadosTable);
+		
+		//Caixa dos botoes
+		Box verticalBox = Box.createVerticalBox();
+		autoresTab.setLeftComponent(verticalBox);
+		
+		//botoes
+		JButton btnListaAutores = new JButton("Listar Autores");
+		verticalBox.add(btnListaAutores);
+		
+		JButton btnInserirAutor = new JButton("Inserir Autor");
+		verticalBox.add(btnInserirAutor);		
+		
+		//configuracao dos botoes
+		autsTab.configBtnListarAutores(btnListaAutores);
+		autsTab.configBtnInserirAutor(btnInserirAutor);
+	}
 
 
 }

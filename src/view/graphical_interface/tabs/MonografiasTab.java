@@ -11,8 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import dao.API;
 import model.Monografia;
-import view.API;
 import view.graphical_interface.popups.InsertMonografia;
 
 public class MonografiasTab extends GenericTab {

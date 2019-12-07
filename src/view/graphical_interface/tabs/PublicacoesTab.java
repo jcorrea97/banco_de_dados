@@ -11,9 +11,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import dao.API;
 import model.Publicacao;
-import view.API;
 import view.graphical_interface.popups.InsertMonografia;
+import view.graphical_interface.popups.LinkAutorPublicacao;
 
 public class PublicacoesTab extends GenericTab{
 	
@@ -115,7 +116,7 @@ public class PublicacoesTab extends GenericTab{
 		{
 			  public void actionPerformed(ActionEvent e)
 			  {
-				  InsertMonografia.executar();			   
+				  LinkAutorPublicacao.executar();			   
 			  }
 			}
 		);

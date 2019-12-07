@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.*;
 
-import view.API;
+import dao.API;
 
 public class InsertArtigo {
 
